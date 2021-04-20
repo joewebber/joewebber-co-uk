@@ -24,13 +24,12 @@ export default function Layout({ children, pageTitle, description, ...props }) {
           color: black;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h3 {
           font-weight: bold;
+        }
+
+        h2 {
+          font-weight: normal;
         }
 
         a {

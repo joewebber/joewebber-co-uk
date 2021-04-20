@@ -6,6 +6,7 @@ export default function PostList({ posts }) {
   return (
     <>
       <div>
+        <h3>Latest Posts</h3>
         {!posts && <div>No posts!</div>}
         <ul>
           {posts &&
