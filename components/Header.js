@@ -5,11 +5,8 @@ export default function Header() {
     <>
       <header className="header">
         <nav className="nav" role="navigation" aria-label="main navigation">
-          <Link href="/">
-            <a>Demo Blog</a>
-          </Link>
-          <Link href="/about">
-            <a>About</a>
+          <Link href="/" className="logo">
+            <a>Joe Webber</a>
           </Link>
         </nav>
       </header>
@@ -17,7 +14,6 @@ export default function Header() {
         header {
           width: 100%;
           height: 100px;
-          border-bottom: 1px solid #eaeaea;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -30,7 +26,7 @@ export default function Header() {
         }
         nav a {
           margin-right: 20px;
-          color: #00a395;
+          color: black;
           text-decoration: none;
         }
         nav a:hover {

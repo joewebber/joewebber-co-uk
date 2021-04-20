@@ -21,7 +21,7 @@ export default function Layout({ children, pageTitle, description, ...props }) {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
             Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
             sans-serif;
-          color: #445566;
+          color: black;
         }
 
         h1,
@@ -34,30 +34,27 @@ export default function Layout({ children, pageTitle, description, ...props }) {
         }
 
         a {
-          color: #00a395;
+          color: black;
         }
 
         .content {
+          width: calc(100% - 40px);
+          max-width: 1200px;
           padding: 2rem 20px;
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          justify-content: left;
+          align-items: left;
+          margin: 0 auto;
         }
 
         footer {
           width: 100%;
           height: 100px;
-          border-top: 1px solid #eaeaea;
           display: flex;
           justify-content: center;
           align-items: center;
-        }
-
-        footer img {
-          padding: 0 5px;
-          height: 1rem;
         }
       `}</style>
       <section className="layout">
@@ -65,7 +62,6 @@ export default function Layout({ children, pageTitle, description, ...props }) {
         <div className="content">{children}</div>
       </section>
       <footer>
-        Built with <img src="/netliheart.svg" alt="Netlify Heart" /> for you
       </footer>
     </>
   )
