@@ -37,9 +37,10 @@ export default Index
 export async function getStaticProps() {
   const configData = await import(`../siteconfig.json`)
 
-  const posts = ((context) => {
-    return getPosts(context)
-  })(require.context('../posts', true, /\.md$/))
+  const data = await getPosts()
+  const posts = data.map((p) => {
+    return p.fields
+  })
 
   return {
     props: {

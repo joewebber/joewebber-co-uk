@@ -8,12 +8,12 @@ const client = createClient({
   accessToken: TOKEN
 })
 
-const getPosts = async () =>  {
-  const entries = await client.getEntries({ content_type: 'post' })
+const getPost = async (slug) =>  {
+  const entries = await client.getEntries({ content_type: 'post', slug })
   if (entries.items) {
-    return entries.items
+    return entries.items[0]
   }
   console.log(`Error getting Entries for ${contentType.name}.`)
 }
 
-export default getPosts
+export default getPost
