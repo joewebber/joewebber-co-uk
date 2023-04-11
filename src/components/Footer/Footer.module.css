@@ -1,0 +1,18 @@
+.container {
+  @apply flex 
+  flex-col
+  items-center
+  justify-center;
+}
+
+.list {
+  @apply flex;
+}
+
+.list li {
+  @apply mr-6;
+}
+
+.list li svg {
+  @apply fill-light;
+}

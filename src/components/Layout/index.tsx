@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
 import Header from '@components/Header'
+import Footer from '@components/Footer'
 
 import styles from './Layout.module.css'
 
@@ -21,7 +22,7 @@ export default function Layout({ children, pageTitle, description }: Props) {
       </Head>
       <Header />
       <main className={styles.main}>{children}</main>
-      <footer></footer>
+      <Footer />
     </>
   )
 }

@@ -8,15 +8,29 @@
   px-6;
 }
 
-.nav {
-  @apply font-bold
-  text-2xl;
+.logo {
+  @apply font-logo
+  font-semibold
+  text-xl
+  flex
+  grow
+  items-center;
+}
+
+.logo span {
+  @apply text-primary
+  text-4xl
+  -mt-2;
+}
+
+.nav ul {
+  @apply flex
+  flex-row;
 }
 
 .nav a {
-  @apply mr-5
-  text-black
-  no-underline;
+  @apply mx-3
+  text-primary;
 }
 
 .nav a:hover {
