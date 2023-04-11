@@ -2,7 +2,8 @@
   @apply flex 
   flex-col
   items-center
-  justify-center;
+  justify-center
+  h-[100px];
 }
 
 .list {
@@ -13,10 +14,15 @@
   @apply mr-6;
 }
 
+.list li:last-child {
+  @apply mr-0;
+}
+
 .list li a:hover svg {
   @apply fill-primary;
 }
 
 .list li svg {
-  @apply fill-light;
+  @apply fill-light
+  w-8;
 }

@@ -12,7 +12,7 @@
   text-2xl
   font-logo
   font-semibold
-  md:text-5xl;
+  lg:text-5xl;
 }
 
 .title span {
@@ -23,6 +23,6 @@
   @apply text-lg
   leading-8
   opacity-50
-  md:text-2xl
-  md:leading-10;
+  lg:text-2xl
+  lg:leading-10;
 }
