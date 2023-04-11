@@ -15,7 +15,7 @@ export default function PostList({ posts }) {
                 <li key={post.slug}>
                   {post.publishDate}: {` `}
                   <Link href={{ pathname: `/post/${post.slug}` }}>
-                    <a>{post?.title}</a>
+                    {post?.title}
                   </Link>
                 </li>
               )

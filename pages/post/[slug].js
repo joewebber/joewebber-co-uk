@@ -14,7 +14,7 @@ const Post = ({ post, title, description, ...props }) => {
         <div className="back">
           ←{' '}
           <Link href="/">
-            <a>Back to post list</a>
+            Back to post list
           </Link>
         </div>
         <article>

@@ -6,7 +6,7 @@ export default function Header() {
       <header className="header">
         <nav className="nav" role="navigation" aria-label="main navigation">
           <Link href="/" className="logo">
-            <a>Joe Webber</a>
+            Joe Webber
           </Link>
         </nav>
       </header>
