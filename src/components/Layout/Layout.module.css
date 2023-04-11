@@ -1,7 +1,9 @@
 .fixedContainer {
   @apply fixed
   h-full
-  w-full;
+  w-full
+  flex
+  flex-col;
   background: rgb(32, 26, 41);
   background: radial-gradient(
     circle,
@@ -16,5 +18,7 @@
   container
   flex
   flex-col
-  px-6;
+  justify-center
+  px-6
+  grow;
 }
