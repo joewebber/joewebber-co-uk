@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import styles from './PostList.module.css'
+//import styles from './PostList.module.css'
 
 export default function PostList({ posts }) {
   if (posts === 'undefined') return null

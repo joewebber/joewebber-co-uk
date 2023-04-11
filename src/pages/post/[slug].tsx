@@ -16,7 +16,10 @@ interface Props {
 const Post = ({ post, title, description }: Props) => {
   return (
     <>
-      <Layout pageTitle={`${title} | ${post.fields.title}`}>
+      <Layout
+        pageTitle={`${title} | ${post.fields.title}`}
+        description={description}
+      >
         <div className="back">
           ← <Link href="/">Back to post list</Link>
         </div>
