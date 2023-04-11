@@ -5,17 +5,20 @@ import getPost from '@utils/getPost'
 
 import Layout from '@components/Layout'
 
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-const Post = ({ post, title, description, ...props }) => {
+interface Props {
+  post: unknown
+  title: string
+  description: string
+}
+
+const Post = ({ post, title, description }: Props) => {
   return (
     <>
       <Layout pageTitle={`${title} | ${post.fields.title}`}>
         <div className="back">
-          ←{' '}
-          <Link href="/">
-            Back to post list
-          </Link>
+          ← <Link href="/">Back to post list</Link>
         </div>
         <article>
           <h1>{post.fields.title}</h1>
@@ -26,9 +29,7 @@ const Post = ({ post, title, description, ...props }) => {
               alt={post.fields.featuredImage.fields.description}
             />
           )}
-          <div>
-            {documentToReactComponents(post.fields.content)}
-          </div>
+          <div>{documentToReactComponents(post.fields.content)}</div>
         </article>
       </Layout>
       <style jsx>{`
@@ -58,7 +59,7 @@ const Post = ({ post, title, description, ...props }) => {
 export default Post
 
 export async function getStaticProps({ ...context }) {
-  const configData = await import(`../../siteconfig.json`)
+  const configData = await import(`../../../siteconfig.json`)
 
   const post = await getPost(context.slug)
 
@@ -76,7 +77,7 @@ export async function getStaticPaths() {
   const posts = await getPosts()
 
   // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => ({
+  const paths = posts?.map((post) => ({
     params: { slug: post.fields.slug },
   }))
 

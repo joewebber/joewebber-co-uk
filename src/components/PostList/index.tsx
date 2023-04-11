@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import styles from './PostList.module.css'
+
 export default function PostList({ posts }) {
   if (posts === 'undefined') return null
 
@@ -22,18 +24,6 @@ export default function PostList({ posts }) {
             })}
         </ul>
       </div>
-      <style jsx>{`
-        ul {
-          padding-left: 0;
-        }
-        li {
-          list-style: none;
-          font-size: 1.4rem;
-        }
-        a {
-          text-decoration: none;
-        }
-      `}</style>
     </>
   )
 }
