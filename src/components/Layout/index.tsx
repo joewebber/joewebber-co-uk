@@ -20,9 +20,11 @@ export default function Layout({ children, pageTitle, description }: Props) {
         <meta name="Description" content={description}></meta>
         <title>{pageTitle}</title>
       </Head>
-      <Header />
-      <main className={styles.main}>{children}</main>
-      <Footer />
+      <div className={styles.fixedContainer}>
+        <Header />
+        <main className={styles.main}>{children}</main>
+        <Footer />
+      </div>
     </>
   )
 }

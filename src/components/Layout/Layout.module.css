@@ -1,8 +1,24 @@
+.fixedContainer {
+  @apply fixed
+  h-full
+  w-full
+  flex
+  flex-col;
+  background: rgb(32, 26, 41);
+  background: radial-gradient(
+    circle,
+    rgba(32, 26, 41, 1) 50%,
+    rgba(23, 25, 38, 1) 100%
+  );
+}
+
 .main {
   @apply mx-auto
   w-full
   container
   flex
   flex-col
-  px-6;
+  justify-center
+  px-6
+  grow;
 }

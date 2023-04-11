@@ -12,11 +12,5 @@
 }
 
 body {
-  background: rgb(32, 26, 41);
-  background: radial-gradient(
-    circle,
-    rgba(32, 26, 41, 1) 50%,
-    rgba(23, 25, 38, 1) 100%
-  );
   @apply text-light;
 }
