@@ -19,10 +19,8 @@ export default function Layout({ children, pageTitle, description }: Props) {
         <meta name="Description" content={description}></meta>
         <title>{pageTitle}</title>
       </Head>
-      <section className={styles.layout}>
-        <Header />
-        <div className={styles.content}>{children}</div>
-      </section>
+      <Header />
+      <main className={styles.main}>{children}</main>
       <footer></footer>
     </>
   )

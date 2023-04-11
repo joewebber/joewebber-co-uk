@@ -1,5 +1,7 @@
 import Layout from '@components/Layout'
 
+import styles from '@styles/Home.module.css'
+
 interface Props {
   title?: string
   description?: string
@@ -9,17 +11,20 @@ const Index = ({ title, description }: Props) => {
   return (
     <>
       <Layout pageTitle={title || ''} description={description}>
-        <h1 className="title">Web / Software Engineer &amp; Consultant</h1>
-        <h2>
+        <h1 className={styles.title}>
+          Web / Software Engineer &amp; Consultant
+        </h1>
+        <h2 className={styles.intro}>
           Director of Engineering with 20 years of experience building websites
-          and online applications. Strong technical skills in ReactJS, NodeJS,
-          Cloud (GCP), PHP, Wordpress. Experienced at providing technical
-          solutions and consulting on projects within the Digital Marketing
-          sector. Team lead with management experience leading compact teams of
-          Developers and Engineers.
+          and online applications. Experienced at providing technical solutions
+          and consulting on projects within the Digital Marketing sector. Team
+          lead with management experience leading compact teams of Developers
+          and Engineers.
         </h2>
-        <h3>Javascript / NodeJS / PHP / Wordpress / Google Cloud</h3>
-        <ul>
+        <h3 className={styles.subtitle}>
+          Javascript / NodeJS / PHP / Wordpress / Google Cloud
+        </h3>
+        <ul className={styles.list}>
           <li>
             <a href="https://www.linkedin.com/in/joe-webber-18254b16/">
               <svg
@@ -46,28 +51,6 @@ const Index = ({ title, description }: Props) => {
           </li>
         </ul>
       </Layout>
-      <style jsx>{`
-        .title {
-          margin: 1rem 0;
-          font-size: 3rem;
-        }
-
-        h2 {
-          line-height: 2.4rem;
-          font-size: 1.6rem;
-        }
-
-        ul {
-          display: flex;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        li {
-          margin-right: 1.5rem;
-        }
-      `}</style>
     </>
   )
 }

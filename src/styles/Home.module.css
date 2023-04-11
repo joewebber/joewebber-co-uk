@@ -1,0 +1,28 @@
+.title {
+  @apply my-4
+  text-2xl
+  font-bold
+  md:text-4xl;
+}
+
+.intro {
+  @apply text-lg
+  leading-8
+  md:text-2xl
+  md:leading-10;
+}
+
+.subtitle {
+  @apply text-lg
+  font-bold
+  my-10
+  md:text-2xl;
+}
+
+.list {
+  @apply flex;
+}
+
+.list li {
+  @apply mr-6;
+}

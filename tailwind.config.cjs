@@ -23,7 +23,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--sans-font)', ...fontFamily.sans],
-        serif: ['var(--serif-font)', ...fontFamily.serif],
       },
     },
   },
