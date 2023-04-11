@@ -13,7 +13,9 @@
   font-semibold
   text-xl
   flex
-  grow
+  /* grow */
+  w-full
+  justify-center
   items-center;
 }
 
@@ -21,18 +23,4 @@
   @apply text-primary
   text-4xl
   -mt-2;
-}
-
-.nav ul {
-  @apply flex
-  flex-row;
-}
-
-.nav a {
-  @apply mx-3
-  text-primary;
-}
-
-.nav a:hover {
-  @apply underline;
 }

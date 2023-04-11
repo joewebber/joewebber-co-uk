@@ -13,6 +13,10 @@
   @apply mr-6;
 }
 
+.list li a:hover svg {
+  @apply fill-primary;
+}
+
 .list li svg {
   @apply fill-light;
 }
