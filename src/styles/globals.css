@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-dark: 32 26 41;
+    --color-light: 236 236 236;
+    --color-primary: 71 160 180;
+    --color-secondary: 228 156 95;
+  }
+}
+
+body {
+  background: rgb(32, 26, 41);
+  background: radial-gradient(
+    circle,
+    rgba(32, 26, 41, 1) 50%,
+    rgba(23, 25, 38, 1) 100%
+  );
+  @apply text-light;
+}

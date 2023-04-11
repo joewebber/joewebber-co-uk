@@ -1,0 +1,22 @@
+.container {
+  @apply flex 
+  flex-col
+  items-center
+  justify-center;
+}
+
+.list {
+  @apply flex;
+}
+
+.list li {
+  @apply mr-6;
+}
+
+.list li a:hover svg {
+  @apply fill-primary;
+}
+
+.list li svg {
+  @apply fill-light;
+}

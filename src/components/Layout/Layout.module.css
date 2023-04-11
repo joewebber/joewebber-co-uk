@@ -1,0 +1,8 @@
+.main {
+  @apply mx-auto
+  w-full
+  container
+  flex
+  flex-col
+  px-6;
+}

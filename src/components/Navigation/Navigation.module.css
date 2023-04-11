@@ -1,0 +1,13 @@
+.nav ul {
+  @apply flex
+  flex-row;
+}
+
+.nav a {
+  @apply mx-3
+  text-primary;
+}
+
+.nav a:hover {
+  @apply underline;
+}

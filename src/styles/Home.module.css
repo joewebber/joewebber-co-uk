@@ -1,0 +1,28 @@
+.container {
+  @apply h-[calc(100vh-200px)]
+  flex
+  flex-col
+  items-center
+  justify-center
+  text-center;
+}
+
+.title {
+  @apply my-4
+  text-2xl
+  font-logo
+  font-semibold
+  md:text-5xl;
+}
+
+.title span {
+  @apply text-primary;
+}
+
+.intro {
+  @apply text-lg
+  leading-8
+  opacity-50
+  md:text-2xl
+  md:leading-10;
+}

@@ -1,0 +1,26 @@
+.header {
+  @apply h-[100px]
+  mx-auto
+  w-full
+  container
+  flex
+  items-center
+  px-6;
+}
+
+.logo {
+  @apply font-logo
+  font-semibold
+  text-xl
+  flex
+  /* grow */
+  w-full
+  justify-center
+  items-center;
+}
+
+.logo span {
+  @apply text-primary
+  text-4xl
+  -mt-2;
+}
