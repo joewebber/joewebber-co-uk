@@ -1,13 +1,14 @@
 .nav ul {
-  @apply flex
-  flex-row;
+  display: flex;
+  flex-direction: row;
 }
 
 .nav a {
-  @apply mx-3
-  text-primary;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  color: rgb(var(--color-primary));
 }
 
 .nav a:hover {
-  @apply underline;
+  text-decoration: underline;
 }

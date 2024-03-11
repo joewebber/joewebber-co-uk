@@ -1,28 +1,28 @@
 .container {
-  @apply flex 
-  flex-col
-  items-center
-  justify-center
-  h-[100px];
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 }
 
 .list {
-  @apply flex;
+  display: flex;
 }
 
 .list li {
-  @apply mr-6;
+  margin-right: 1.5rem;
 }
 
 .list li:last-child {
-  @apply mr-0;
+  margin-right: 0;
 }
 
 .list li a:hover svg {
-  @apply fill-primary;
+  fill: rgb(var(--color-primary) / 1);
 }
 
 .list li svg {
-  @apply fill-light
-  w-8;
+  fill: rgb(var(--color-light) / 1);
+  width: 2rem;
 }

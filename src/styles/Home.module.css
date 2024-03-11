@@ -1,27 +1,40 @@
 .container {
-  @apply flex
-  flex-col
-  items-center
-  justify-center
-  text-center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .title {
-  @apply my-4
-  text-2xl
-  font-logo
-  font-semibold
-  lg:text-5xl;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3rem;
+    line-height: 1;
+  }
 }
 
 .title span {
-  @apply text-primary;
+  color: rgb(var(--color-primary));
 }
 
 .intro {
-  @apply text-lg
-  leading-8
-  opacity-50
-  lg:text-2xl
-  lg:leading-10;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  line-height: 2rem;
+  opacity: 0.5;
+}
+
+@media (min-width: 1024px) {
+  .intro {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+  }
 }

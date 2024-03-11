@@ -18,7 +18,7 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@delcarations/*": ["src/delcarations/*"],
-      "@utils/*": ["src/utils/*"],
+      "@lib/*": ["src/lib/*"],
       "@styles/*": ["src/styles/*"]
     },
     "plugins": [
