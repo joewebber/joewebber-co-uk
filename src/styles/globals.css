@@ -1,16 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'normalize.css';
 
-@layer base {
-  :root {
-    --color-dark: 32 26 41;
-    --color-light: 236 236 236;
-    --color-primary: 71 160 180;
-    --color-secondary: 228 156 95;
-  }
+:root {
+  --color-dark: 32 26 41;
+  --color-light: 236 236 236;
+  --color-primary: 71 160 180;
+  --color-secondary: 228 156 95;
+  font-family: var(--logo-font);
 }
 
 body {
-  @apply text-light;
+  color: rgb(var(--color-light));
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin: 0;
 }
