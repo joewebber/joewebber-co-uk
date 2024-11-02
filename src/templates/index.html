@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joe Webber | Web / Software Engineer & Consultant</title>
+  <meta name="description"
+    content="Joe Webber is a Web / Software Engineer & Consultant. He has 20 years of experience building websites and online applications. He provides bespoke solutions, consulting and technical direction.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    .fixedContainer {
+      display: flex;
+      position: fixed;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      background: rgb(32, 26, 41);
+      background: radial-gradient(circle,
+          rgba(32, 26, 41, 1) 50%,
+          rgba(23, 25, 38, 1) 100%);
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      flex-grow: 1;
+    }
+
+    @media (min-width: 640px) {
+      .main {
+        max-width: 640px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .main {
+        max-width: 768px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .main {
+        max-width: 1024px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .main {
+        max-width: 1280px;
+      }
+    }
+
+    @media (min-width: 1536px) {
+      .main {
+        max-width: 1536px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fixedContainer">
+    {{header_content}}
+    <main class="main">{{page_content}}</main>
+    {{footer_content}}
+  </div>
+</body>
+
+</html>

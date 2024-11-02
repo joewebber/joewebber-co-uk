@@ -1,0 +1,63 @@
+<header class="header">
+  <a href="/" class="logo">
+    Joe Webber<span>.</span>
+  </a>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .header {
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .header {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .header {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .header {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .header {
+      max-width: 1536px;
+    }
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: rgb(var(--color-light));
+  }
+
+  .logo span {
+    margin-top: -0.6rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    color: rgb(var(--color-primary));
+    font-family: var(--logo-font);
+  }
+</style>
