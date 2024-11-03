@@ -2,7 +2,11 @@ name: deploy to pages
 
 on:
   push:
-    branches: ["v2"]
+    branches: ["main"]
+    paths:
+      - "src/**"
+      - "data/**"
+      - "index.ts"
 
   workflow_dispatch:
 
