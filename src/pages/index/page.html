@@ -1,0 +1,51 @@
+<div class="container">
+  <h1 class="title">
+    {{title}}
+  </h1>
+  <h2 class="intro">
+    {{intro}}
+  </h2>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 1024px) {
+    .title {
+      font-size: 3rem;
+      line-height: 1;
+    }
+  }
+
+  .title span {
+    color: rgb(var(--color-primary));
+  }
+
+  .intro {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    line-height: 2rem;
+    opacity: 0.5;
+  }
+
+  @media (min-width: 1024px) {
+    .intro {
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+    }
+  }
+</style>
