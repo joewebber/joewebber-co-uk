@@ -7,9 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_OPTIONS='--import=./register.js' node ./index.ts",
-    "serve": "http-server dist/public",
-    "dev:serve": "live-server --quiet --no-css-inject --open=dist/public",
-    "dev": "nodemon --exec 'npm run build' --watch src --watch data -e js,ts,css,html,json"
+    "dev": "npm run build && node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,12 +21,12 @@
   "homepage": "https://github.com/joewebber/joewebber-co-uk#readme",
   "devDependencies": {
     "@types/node": "^22.8.6",
+    "chokidar": "^4.0.1",
     "eslint": "^9.14.0",
-    "http-server": "^14.1.1",
-    "live-server": "^1.2.2",
-    "nodemon": "^3.1.7",
+    "mime": "^4.0.4",
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "ws": "^8.18.0"
   }
 }
