@@ -1,7 +1,7 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs'
+import * as path from 'path'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 /**
  * Clear the dist directory and create the child directory.
@@ -9,13 +9,13 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
  * @returns void
  */
 const clearDist = (): void => {
-  if (fs.existsSync(path.resolve(__dirname, "dist"))) {
-    fs.rmSync(path.resolve(__dirname, "dist"), { recursive: true });
+  if (fs.existsSync(path.resolve(__dirname, 'dist'))) {
+    fs.rmSync(path.resolve(__dirname, 'dist'), { recursive: true })
   }
-  fs.mkdirSync(path.resolve(__dirname, "dist"));
-  fs.mkdirSync(path.resolve(__dirname, "dist", "public"));
-  fs.mkdirSync(path.resolve(__dirname, "dist", "public", "styles"));
-};
+  fs.mkdirSync(path.resolve(__dirname, 'dist'))
+  fs.mkdirSync(path.resolve(__dirname, 'dist', 'public'))
+  fs.mkdirSync(path.resolve(__dirname, 'dist', 'public', 'styles'))
+}
 
 /**
  * Get all pages and render them.
@@ -23,34 +23,34 @@ const clearDist = (): void => {
  * @returns void
  */
 const getPages = (): void => {
-  const pages = fs.readdirSync(path.resolve(__dirname, "src", "pages"));
+  const pages = fs.readdirSync(path.resolve(__dirname, 'src', 'pages'))
 
   pages.forEach((page) => {
     let pageHtml = fs
-      .readFileSync(path.resolve(__dirname, "src", "pages", page, "page.html"))
-      .toString();
+      .readFileSync(path.resolve(__dirname, 'src', 'pages', page, 'page.html'))
+      .toString()
 
-    const data = getPageData(page);
+    const data = getPageData(page)
     Object.keys(data).forEach((key) => {
-      pageHtml = pageHtml.replace(`{{${key}}}`, data[key]);
-    });
+      pageHtml = pageHtml.replace(`{{${key}}}`, data[key])
+    })
 
-    const templateHtml = getPageTemplate(page);
-    let template = templateHtml.replace("{{page_content}}", pageHtml);
+    const templateHtml = getPageTemplate(page)
+    let template = templateHtml.replace('{{page_content}}', pageHtml)
 
-    const headerHtml = getHeaderTemplate();
-    template = template.replace("{{header_content}}", headerHtml);
+    const headerHtml = getHeaderTemplate()
+    template = template.replace('{{header_content}}', headerHtml)
 
-    const footerHtml = getFooterTemplate();
-    template = template.replace("{{footer_content}}", footerHtml);
+    const footerHtml = getFooterTemplate()
+    template = template.replace('{{footer_content}}', footerHtml)
 
     fs.writeFileSync(
-      path.resolve(__dirname, "dist", "public", `${page}.html`),
+      path.resolve(__dirname, 'dist', 'public', `${page}.html`),
       template,
-      "utf-8"
-    );
-  });
-};
+      'utf-8'
+    )
+  })
+}
 
 /**
  * Get the data for a page.
@@ -62,13 +62,13 @@ const getPageData = (page: string): { [key: string]: any } => {
   const data = JSON.parse(
     fs
       .readFileSync(
-        path.resolve(__dirname, "data", "pages", `${page}.json`),
-        "utf-8"
+        path.resolve(__dirname, 'data', 'pages', `${page}.json`),
+        'utf-8'
       )
       .toString()
-  );
-  return data;
-};
+  )
+  return data
+}
 
 /**
  * Get the template for a page.
@@ -77,50 +77,55 @@ const getPageData = (page: string): { [key: string]: any } => {
  * @returns The template for the page.
  */
 const getPageTemplate = (page: string): string => {
+  const pageTemplateName = fs.existsSync(
+    path.resolve(__dirname, 'src', 'templates', `${page}.html`)
+  )
+    ? page
+    : 'index'
   const templateHtml = fs
     .readFileSync(
-      path.resolve(__dirname, "src", "templates", `${page}.html`),
-      "utf-8"
+      path.resolve(__dirname, 'src', 'templates', `${pageTemplateName}.html`),
+      'utf-8'
     )
-    .toString();
-  return templateHtml;
-};
+    .toString()
+  return templateHtml
+}
 
 /**
  * Get header template.
  */
 const getHeaderTemplate = (): string => {
   const headerHtml = fs
-    .readFileSync(path.resolve(__dirname, "src", "templates", "header.html"))
-    .toString();
-  return headerHtml;
-};
+    .readFileSync(path.resolve(__dirname, 'src', 'templates', 'header.html'))
+    .toString()
+  return headerHtml
+}
 
 /**
  * Get footer template.
  */
 const getFooterTemplate = (): string => {
   const footerHtml = fs
-    .readFileSync(path.resolve(__dirname, "src", "templates", "footer.html"))
-    .toString();
-  return footerHtml;
-};
+    .readFileSync(path.resolve(__dirname, 'src', 'templates', 'footer.html'))
+    .toString()
+  return footerHtml
+}
 
 /**
  * Get styles.
  */
 const getStyles = (): void => {
-  const styles = fs.readdirSync(path.resolve(__dirname, "src", "styles"));
+  const styles = fs.readdirSync(path.resolve(__dirname, 'src', 'styles'))
 
   styles.forEach((style) => {
     fs.copyFileSync(
-      path.resolve(__dirname, "src", "styles", style),
-      path.resolve(__dirname, "dist", "public", "styles", style)
-    );
-  });
-};
+      path.resolve(__dirname, 'src', 'styles', style),
+      path.resolve(__dirname, 'dist', 'public', 'styles', style)
+    )
+  })
+}
 
 // Run the script.
-clearDist();
-getPages();
-getStyles();
+clearDist()
+getPages()
+getStyles()

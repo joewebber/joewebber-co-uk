@@ -2,6 +2,13 @@
   <a href="/" class="logo">
     Joe Webber<span>.</span>
   </a>
+  <nav>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
 <style>
@@ -9,43 +16,12 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 100px;
+    height: 120px;
     margin: 0 auto;
-  }
-
-  @media (min-width: 640px) {
-    .header {
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .header {
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .header {
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .header {
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px) {
-    .header {
-      max-width: 1536px;
-    }
   }
 
   .logo {
     display: flex;
-    justify-content: center;
     width: 100%;
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -59,5 +35,29 @@
     line-height: 2.5rem;
     color: rgb(var(--color-primary));
     font-family: var(--logo-font);
+  }
+
+  nav ul {
+    display: flex;
+  }
+
+  nav ul li {
+    margin-right: 1.5rem;
+  }
+
+  nav ul li:last-child {
+    margin-right: 0;
+  }
+
+  nav ul li a {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+    color: rgb(var(--color-light));
+    text-decoration: none;
+  }
+
+  nav ul li a:hover {
+    color: rgb(var(--color-primary));
   }
 </style>

@@ -44,6 +44,12 @@ const assetsServer = http.createServer(async (request, response) => {
   // If the pathname ends with '/', append 'index.html'.
   if (pathname.endsWith('/')) {
     pathname += 'index.html'
+  } else {
+    // If the pathname does not have an extension, append '.html'.
+    const ext = path.extname(pathname)
+    if (!ext) {
+      pathname += '.html'
+    }
   }
 
   try {

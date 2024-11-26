@@ -1,18 +1,25 @@
-@import "normalize.css";
-@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&family=Quicksand&display=swap");
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand&display=swap');
 
 :root {
   --color-dark: 32 26 41;
   --color-light: 236 236 236;
   --color-primary: 71 160 180;
   --color-secondary: 228 156 95;
-  --sans-font: "Inter", sans-serif;
-  --logo-font: "Quicksand", sans-serif;
+  --sans-font: 'Inter', sans-serif;
+  --serif-font: 'PT Serif', serif;
+  --logo-font: 'Quicksand', sans-serif;
   font-family: var(--logo-font);
 }
 
 body {
   color: rgb(var(--color-light));
+  background: rgb(32, 26, 41);
+  background: radial-gradient(
+    circle,
+    rgba(32, 26, 41, 1) 50%,
+    rgba(23, 25, 38, 1) 100%
+  );
 }
 
 a {

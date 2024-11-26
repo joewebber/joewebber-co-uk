@@ -12,54 +12,14 @@
   <link rel="stylesheet" href="styles/global.css">
   <style>
     .fixedContainer {
-      display: flex;
-      position: fixed;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      background: rgb(32, 26, 41);
-      background: radial-gradient(circle,
-          rgba(32, 26, 41, 1) 50%,
-          rgba(23, 25, 38, 1) 100%);
-    }
-
-    .main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      flex-grow: 1;
-    }
-
-    @media (min-width: 640px) {
-      .main {
-        max-width: 640px;
-      }
+      width: 90%;
+      margin: 0 5%;
     }
 
     @media (min-width: 768px) {
-      .main {
+      .fixedContainer {
         max-width: 768px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .main {
-        max-width: 1024px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .main {
-        max-width: 1280px;
-      }
-    }
-
-    @media (min-width: 1536px) {
-      .main {
-        max-width: 1536px;
+        margin: 0 auto;
       }
     }
   </style>
