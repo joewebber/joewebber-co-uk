@@ -1,8 +1,3 @@
-title: Choosing your path: Developers guide to career options
-date: 2025-04-22
-
----
-
 At some point in the career of a Developer they have to make a choice.
 
 For some (including myself) it isn't a conscious decision, but rather something that happens by accident.

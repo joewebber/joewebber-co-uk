@@ -1,28 +1,5 @@
 <div class="container">
-  <article>
-    <h2>Lorem ipsum dolor sit amet</h2>
-    <time datetime="2024-11-26">November 26, 2024</time>
-    <p>Consectetur adipiscing elit. Quisque a iaculis ligula. Sed ultrices dictum sapien, in
-      imperdiet enim congue sed. Sed in gravida risus. Pellentesque pulvinar ante ullamcorper odio commodo placerat.
-      Donec
-      sed dolor laoreet, scelerisque orci quis, porta diam. Integer mauris est, euismod a finibus id, convallis id
-      metus.
-      Phasellus at purus libero. Vivamus at velit magna. Duis posuere sodales rhoncus. Nulla finibus pulvinar varius.
-      Morbi magna ligula, tempor ut justo a, scelerisque dapibus nisi. Maecenas non ligula tempor, convallis orci et,
-      placerat nisl. Quisque eget ante feugiat, bibendum ipsum ut, lobortis sapien...</p>
-  </article>
-  <article>
-    <h2>Lorem ipsum dolor sit amet</h2>
-    <time datetime="2024-11-26">November 26, 2024</time>
-    <p>Consectetur adipiscing elit. Quisque a iaculis ligula. Sed ultrices dictum sapien, in
-      imperdiet enim congue sed. Sed in gravida risus. Pellentesque pulvinar ante ullamcorper odio commodo placerat.
-      Donec
-      sed dolor laoreet, scelerisque orci quis, porta diam. Integer mauris est, euismod a finibus id, convallis id
-      metus.
-      Phasellus at purus libero. Vivamus at velit magna. Duis posuere sodales rhoncus. Nulla finibus pulvinar varius.
-      Morbi magna ligula, tempor ut justo a, scelerisque dapibus nisi. Maecenas non ligula tempor, convallis orci et,
-      placerat nisl. Quisque eget ante feugiat, bibendum ipsum ut, lobortis sapien...</p>
-  </article>
+  {{post_loop}}
 </div>
 
 <style>
@@ -31,7 +8,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 640px;
     margin: 2rem auto;
   }
 
@@ -51,6 +27,11 @@
     line-height: 2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+  }
+
+  article h2 a {
+    text-decoration: none;
+    color: rgb(var(--color-secondary));
   }
 
   article time {
