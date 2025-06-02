@@ -95,33 +95,63 @@ const getPosts = (): void => {
  * @returns void
  */
 const getPages = (): void => {
-  const pages = fs.readdirSync(path.resolve(__dirname, 'src', 'pages'))
+  const pages = fs.readdirSync(path.resolve(__dirname, 'data', 'pages'))
 
   pages.forEach((page) => {
-    let pageHtml = fs
-      .readFileSync(path.resolve(__dirname, 'src', 'pages', page, 'page.html'))
+    const pageMeta = fs
+      .readFileSync(path.resolve(__dirname, 'data', 'pages', page, 'meta.json'))
+      .toString()
+    const pageMetaJson = JSON.parse(pageMeta)
+
+    const pageContent = fs
+      .readFileSync(
+        path.resolve(__dirname, 'data', 'pages', page, 'content.md'),
+        'utf-8'
+      )
       .toString()
 
-    const data = getPageData(page)
-    Object.keys(data).forEach((key) => {
-      pageHtml = pageHtml.replace(`{{${key}}}`, data[key as keyof Page])
-    })
+    const pageTemplate = fs.existsSync(
+      path.resolve(__dirname, 'src', 'templates', 'page', `${page}.html`)
+    )
+      ? fs.readFileSync(
+          path.resolve(__dirname, 'src', 'templates', 'page', `${page}.html`),
+          'utf-8'
+        )
+      : // Fallback to default page template if specific template does not exist
+        fs.readFileSync(
+          path.resolve(__dirname, 'src', 'templates', 'page', `page.html`),
+          'utf-8'
+        )
+
+    let pageTemplateHtml = pageTemplate
+      .toString()
+      .replace('{{page_title}}', pageMetaJson.title)
+
+    // Convert markdown to HTML
+    const pageHtml = markdownToHtml(pageContent)
+    pageTemplateHtml = pageTemplateHtml.replace('{{page_content}}', pageHtml)
+    pageTemplateHtml = pageTemplateHtml.replace(
+      /{{page_date}}/g,
+      pageMetaJson.date
+    )
 
     const postLoop = getPostLoop()
-    pageHtml = pageHtml.replace('{{post_loop}}', postLoop)
-
-    const templateHtml = getPageTemplate(page)
-    let template = templateHtml.replace('{{page_content}}', pageHtml)
+    pageTemplateHtml = pageTemplateHtml.replace('{{post_loop}}', postLoop)
 
     const headerHtml = getHeaderTemplate()
-    template = template.replace('{{header_content}}', headerHtml)
-
+    pageTemplateHtml = pageTemplateHtml.replace(
+      '{{header_content}}',
+      headerHtml
+    )
     const footerHtml = getFooterTemplate()
-    template = template.replace('{{footer_content}}', footerHtml)
+    pageTemplateHtml = pageTemplateHtml.replace(
+      '{{footer_content}}',
+      footerHtml
+    )
 
     fs.writeFileSync(
-      path.resolve(__dirname, 'dist', 'public', `${page}.html`),
-      template,
+      path.resolve(__dirname, 'dist', 'public', `${pageMetaJson.slug}.html`),
+      pageTemplateHtml,
       'utf-8'
     )
   })
@@ -183,45 +213,6 @@ const getPostLoop = (): string => {
   })
 
   return postLoop
-}
-
-/**
- * Get the data for a page.
- *
- * @param page The page to get the data for.
- * @returns The data for the page.
- */
-const getPageData = (page: string): Page => {
-  const data: Page = JSON.parse(
-    fs
-      .readFileSync(
-        path.resolve(__dirname, 'data', 'pages', `${page}.json`),
-        'utf-8'
-      )
-      .toString()
-  )
-  return data
-}
-
-/**
- * Get the template for a page.
- *
- * @param page The page to get the template for.
- * @returns The template for the page.
- */
-const getPageTemplate = (page: string): string => {
-  const pageTemplateName = fs.existsSync(
-    path.resolve(__dirname, 'src', 'templates', `${page}.html`)
-  )
-    ? page
-    : 'index'
-  const templateHtml = fs
-    .readFileSync(
-      path.resolve(__dirname, 'src', 'templates', `${pageTemplateName}.html`),
-      'utf-8'
-    )
-    .toString()
-  return templateHtml
 }
 
 /**
