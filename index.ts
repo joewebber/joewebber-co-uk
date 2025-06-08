@@ -22,6 +22,7 @@ const clearDist = (): void => {
   fs.mkdirSync(path.resolve(__dirname, 'dist', 'public'))
   fs.mkdirSync(path.resolve(__dirname, 'dist', 'public', 'styles'))
   fs.mkdirSync(path.resolve(__dirname, 'dist', 'public', 'posts'))
+  fs.mkdirSync(path.resolve(__dirname, 'dist', 'public', 'images'))
 }
 
 /**
@@ -44,6 +45,9 @@ const getPosts = (): void => {
         'utf-8'
       )
       .toString()
+
+    // Copy images referenced in this post's markdown
+    copyReferencedImages(postContent)
 
     const postTemplate = fs
       .readFileSync(
@@ -109,6 +113,9 @@ const getPages = (): void => {
         'utf-8'
       )
       .toString()
+
+    // Copy images referenced in this page's markdown
+    copyReferencedImages(pageContent)
 
     const pageTemplate = fs.existsSync(
       path.resolve(__dirname, 'src', 'templates', 'page', `${page}.html`)
@@ -247,6 +254,29 @@ const getStyles = (): void => {
       path.resolve(__dirname, 'dist', 'public', 'styles', style)
     )
   })
+}
+
+/**
+ * Copy images referenced in markdown content to dist/public/images.
+ * @param markdown The markdown content
+ */
+const copyReferencedImages = (markdown: string): void => {
+  const imageRegex = /!\[[^\]]*\]\(([^)]+)\)/g
+  let match
+  const imagesDir = path.resolve(__dirname, 'data', 'images')
+  const distImagesDir = path.resolve(__dirname, 'dist', 'public', 'images')
+  if (!fs.existsSync(distImagesDir)) {
+    fs.mkdirSync(distImagesDir, { recursive: true })
+  }
+  while ((match = imageRegex.exec(markdown)) !== null) {
+    const imagePath = match[1]
+    const filename = path.basename(imagePath)
+    const src = path.resolve(imagesDir, filename)
+    const dest = path.resolve(distImagesDir, filename)
+    if (fs.existsSync(src) && !fs.existsSync(dest)) {
+      fs.copyFileSync(src, dest)
+    }
+  }
 }
 
 // Run the script.

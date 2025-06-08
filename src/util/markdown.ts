@@ -4,6 +4,7 @@ type InlineNode =
   | { type: 'italic'; text: string }
   | { type: 'code'; text: string }
   | { type: 'link'; text: string; url: string }
+  | { type: 'image'; alt: string; url: string }
 
 type MarkdownNode =
   | { type: 'heading'; level: number; content: InlineNode[] }
@@ -12,6 +13,10 @@ type MarkdownNode =
 
 function parseInline(text: string): InlineNode[] {
   const patterns: [RegExp, (match: RegExpMatchArray) => InlineNode][] = [
+    [
+      /!\[([^\]]*)\]\(([^)]+)\)/g,
+      (m) => ({ type: 'image', alt: m[1], url: m[2] }),
+    ],
     [/\*\*(.+?)\*\*/g, (m) => ({ type: 'bold', text: m[1] })],
     [/__(.+?)__/g, (m) => ({ type: 'bold', text: m[1] })],
     [/\*(.+?)\*/g, (m) => ({ type: 'italic', text: m[1] })],
@@ -124,6 +129,10 @@ function renderInline(nodes: InlineNode[]): string {
           return `<code>${escapeHtml(node.text)}</code>`
         case 'link':
           return `<a href="${escapeHtml(node.url)}">${escapeHtml(node.text)}</a>`
+        case 'image':
+          // Always rewrite image URLs to /images/filename
+          const filename = node.url.split('/').pop() || node.url
+          return `<img src="/images/${escapeHtml(filename)}" alt="${escapeHtml(node.alt)}">`
       }
     })
     .join('')

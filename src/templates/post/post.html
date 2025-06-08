@@ -10,26 +10,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../styles/global.css">
-  <style>
-    .fixedContainer {
-      width: 90%;
-      margin: 0 5%;
-    }
-
-    @media (min-width: 768px) {
-      .fixedContainer {
-        max-width: 768px;
-        margin: 0 auto;
-      }
-    }
-  </style>
 </head>
 
 <body>
   <div class="fixedContainer">
     {{header_content}}
     <main class="main">
-      <article>
+      <article class="post">
         <h1>{{post_title}}</h1>
         <time datetime="{{post_date}}">{{post_date}}</time>
         {{post_content}}
