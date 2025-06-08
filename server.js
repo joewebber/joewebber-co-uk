@@ -6,7 +6,7 @@ import { WebSocketServer } from 'ws'
 import chokidar from 'chokidar'
 import { execSync } from 'child_process'
 
-const ROOT = path.resolve('./src')
+const PATHS = [path.resolve('./src'), path.resolve('./data')]
 const WEB_ROOT = path.resolve('./dist/public')
 
 const PORT = 8080
@@ -44,6 +44,12 @@ const assetsServer = http.createServer(async (request, response) => {
   // If the pathname ends with '/', append 'index.html'.
   if (pathname.endsWith('/')) {
     pathname += 'index.html'
+  } else {
+    // If the pathname does not have an extension, append '.html'.
+    const ext = path.extname(pathname)
+    if (!ext) {
+      pathname += '.html'
+    }
   }
 
   try {
@@ -100,7 +106,7 @@ reloadServer.on('reload', () => {
 })
 
 // Watch for changes in the ROOT directory.
-chokidar.watch(ROOT).on('all', (event, path) => {
+chokidar.watch(PATHS).on('all', (event, path) => {
   if (event === 'change') {
     console.info(`Detected change in ${path}. Reloading...`)
     execSync('npm run build')
