@@ -1,8 +1,7 @@
 ---
 date: 2025-04-22
+title: Choosing your career path
 ---
-
-# Choosing your career path
 
 At some point in the career of a Developer they have to make a choice.
 
