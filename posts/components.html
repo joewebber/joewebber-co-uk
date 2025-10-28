@@ -1,17 +1,3 @@
 <header :is="pagehead">
-  { formatDate(date) }
-
-  <script>
-    function formatDate(date) {
-      return new Date(date).toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
-    }
-  </script>
+  <time>{ new Date(date).toLocaleDateString("en-GB") }</time>
 </header>
-
-<figure :is="placeholder" class="{ class }">
-  <div --height="{ height }px" />
-</figure>

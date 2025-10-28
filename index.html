@@ -1,18 +1,7 @@
 <!doctype html>
 
-<article :each="page in blog">
-  <h2><a href="{ page.url }">{ page.title }</a></h2>
-  <time>{ page.date }</time>
-  <p>{{ markdown(page.description) }}</p>
-  </a>
-  </li>
-  <script>
-    function formatDate(date) {
-      return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
-    }
-  </script>
+<article :each="post in blog">
+  <h2><a href="{ post.url }">{ post.title }</a></h2>
+  <time>{ new Date(post.date).toLocaleDateString("en-GB") }</time>
+  <p>{ markdown(post.description) }</p>
 </article>
