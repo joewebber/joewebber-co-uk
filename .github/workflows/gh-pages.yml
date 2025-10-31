@@ -3,7 +3,7 @@ name: Build and Deploy Hugo Site to GitHub Pages
 on:
   push:
     branches:
-      - nuejs-migration
+      - main
   workflow_dispatch:
 
 jobs:
