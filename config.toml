@@ -29,3 +29,7 @@ home = ["HTML", "RSS"]
 [markup]
   [markup.goldmark.renderer]
     unsafe = true
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
