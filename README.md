@@ -1,30 +1,36 @@
-# joewebber.co.uk
+# Joe Webber - Hugo Static Site
 
-Source code for personal website.
+This is the source code for [joewebber.co.uk](https://joewebber.co.uk), built with the [Hugo](https://gohugo.io/) static site generator.
 
-## Installation
+## Getting Started
 
-```bash
-npm install
-```
+1. **Install Hugo**
+   - On Ubuntu: `sudo apt-get install hugo`
+   - Or see [Hugo install docs](https://gohugo.io/getting-started/installing/)
 
-## Build
+2. **Run the site locally**
+   ```sh
+   hugo server
+   ```
+   The site will be available at `http://localhost:1313`.
 
-The site is built as a fully static HTML/CSS site. The build process uses `index.ts` to compile from templates & markdown.
+3. **Build for production**
+   ```sh
+   hugo
+   ```
+   The static files will be generated in the `public/` directory.
 
-Run the build process using the following:
+## Project Structure
 
-```bash
-npm run build
-```
-
-## Local Development
-
-The stack contains two servers:
-
-- **HTTP Server**: Handles frontend requests and injects the `client.js` file, which is need for live reloads.
-- **Websockets Server**: Handles live reloads.
+- `content/` — Markdown posts and pages
+- `layouts/` — HTML templates (Go templates)
+- `static/` — CSS, images, and other static assets
+- `config.toml` — Site configuration
 
 ## Deployment
 
-A Github actions workflow handles the build and deployment to Github pages.
+Upload the contents of the `public/` folder to your web server or use a static hosting service (Netlify, Vercel, GitHub Pages, etc).
+
+## License
+
+MIT License
