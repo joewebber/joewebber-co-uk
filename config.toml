@@ -1,0 +1,31 @@
+baseURL = "https://joewebber.co.uk/"
+languageCode = "en-gb"
+title = "Joe Webber / Tech & Product Leader"
+author = "Joe Webber"
+copyright = "Joe Webber"
+
+[params]
+viewTransitions = true
+inlineCSS = true
+
+[outputs]
+home = ["HTML", "RSS"]
+
+[services]
+  [services.rss]
+    title = "Joe Webber"
+    description = "Tech & Product Leader"
+    enabled = true
+
+[menu]
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 1
+
+[permalinks]
+  posts = "/posts/:slug/"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true

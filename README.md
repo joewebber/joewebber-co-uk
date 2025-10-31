@@ -1,61 +1,36 @@
-# Blog (NueJS)
+# Joe Webber - Hugo Static Site
 
-This folder contains the source code and content for the blog section of the site, built using [NueJS](https://nuejs.org/).
-
-## Structure
-
-- `index.html` — Main entry point for the blog.
-- `layout.html` — Shared layout template for blog pages.
-- `index.css` — Global styles for the blog.
-- `site.yaml` — Site configuration and metadata.
-- `posts/` — Blog posts, written in Markdown (`.md`) or HTML. Each post is a separate file.
-  - Example post: `developers-guide-to-career-options.md`
-  - Example layout/component: `components.html` (not a post, but a layout file for post components)
+This is the source code for [joewebber.co.uk](https://joewebber.co.uk), built with the [Hugo](https://gohugo.io/) static site generator.
 
 ## Getting Started
 
-1. **Install Bun** (if not already installed):
+1. **Install Hugo**
+   - On Ubuntu: `sudo apt-get install hugo`
+   - Or see [Hugo install docs](https://gohugo.io/getting-started/installing/)
 
-Linux & macOS:
+2. **Run the site locally**
+   ```sh
+   hugo server
+   ```
+   The site will be available at `http://localhost:1313`.
 
-```sh
-curl -fsSL https://bun.sh/install | bash
-```
+3. **Build for production**
+   ```sh
+   hugo
+   ```
+   The static files will be generated in the `public/` directory.
 
-Windows:
+## Project Structure
 
-```sh
-powershell -c "irm bun.sh/install.ps1 | iex"
-```
+- `content/` — Markdown posts and pages
+- `layouts/` — HTML templates (Go templates)
+- `static/` — CSS, images, and other static assets
+- `config.toml` — Site configuration
 
-2. **Install Nue CLI** (if not already installed):
+## Deployment
 
-```sh
-bun install --global nuekit
-```
+Upload the contents of the `public/` folder to your web server or use a static hosting service (Netlify, Vercel, GitHub Pages, etc).
 
-3. **Run the development server:**
+## License
 
-```sh
-nue
-```
-
-4. **Build for production:**
-
-```sh
-nue build blog
-```
-
-## Adding Posts
-
-- Add new Markdown or HTML files to the `posts/` directory.
-- Update `site.yaml` if you want to add metadata or navigation links.
-
-## Customisation
-
-- Edit `layout.html` to change the shared layout for all blog pages.
-- Edit `index.css` for global styles.
-
-## Learn More
-
-- [NueJS Documentation](https://nuejs.org/docs)
+MIT License

@@ -1,7 +1,0 @@
-<!doctype html>
-
-<article :each="post in blog">
-  <h2><a href="{ post.url }">{ post.title }</a></h2>
-  <time>{ new Date(post.date).toLocaleDateString("en-GB") }</time>
-  <p>{ markdown(post.description) }</p>
-</article>
