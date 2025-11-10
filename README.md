@@ -27,6 +27,25 @@ This is the source code for [joewebber.co.uk](https://joewebber.co.uk), built wi
 - `static/` — CSS, images, and other static assets
 - `config.toml` — Site configuration
 
+## Content Management
+
+This site uses [Decap CMS](https://decapcms.org/) for content management. 
+
+### Accessing the CMS
+
+1. Navigate to `https://joewebber.co.uk/admin/` (or `http://localhost:1313/admin/` when running locally)
+2. Authenticate with your GitHub account
+3. Start creating and editing content
+
+### CMS Features
+
+- Edit posts and pages through a user-friendly interface
+- Add new blog posts without touching code
+- Upload and manage images
+- Preview content before publishing
+
+**Note:** You need write access to the GitHub repository to use the CMS.
+
 ## Deployment
 
 Upload the contents of the `public/` folder to your web server or use a static hosting service (Netlify, Vercel, GitHub Pages, etc).
