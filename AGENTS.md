@@ -12,6 +12,7 @@ This is the source code for [joewebber.co.uk](https://joewebber.co.uk), a person
 - **Styling**: Custom CSS (`static/index.css`, 266 lines)
 - **Deployment**: GitHub Pages via GitHub Actions
 - **Domain**: joewebber.co.uk (via CNAME)
+- **Content Management**: Decap CMS (formerly Netlify CMS)
 
 ## Project Structure
 
@@ -38,10 +39,15 @@ This is the source code for [joewebber.co.uk](https://joewebber.co.uk), a person
 │   │   └── footer.html
 │   └── index.html           # Homepage template
 ├── static/
+│   ├── admin/
+│   │   ├── index.html       # Decap CMS entry point
+│   │   └── config.yml       # Decap CMS configuration
+│   ├── images/              # Media uploads directory for CMS
 │   ├── CNAME                # Custom domain configuration
 │   └── index.css            # Main stylesheet
 ├── .gitignore
 ├── .instructions.md         # Hugo CLI reference documentation
+├── AGENTS.md               # This file - repository context and integrations
 ├── CNAME                    # Domain configuration (root)
 ├── config.toml             # Hugo site configuration
 └── README.md               # Getting started guide
@@ -96,6 +102,53 @@ New content files inherit from `archetypes/default.md`:
 - Auto-populated date
 - Draft status set to true by default
 
+### Decap CMS Integration
+
+This site uses [Decap CMS](https://decapcms.org/) (formerly Netlify CMS) for content management. Decap CMS provides a user-friendly web interface for managing content without directly editing markdown files or using Git commands.
+
+#### Authentication
+- **Provider**: GitHub OAuth
+- **Repository**: `joewebber/joewebber-co-uk`
+- **Branch**: `main`
+- **Access Control**: Only users with write access to the GitHub repository can use the CMS
+
+#### Configuration
+The CMS configuration is located at `static/admin/config.yml` and defines:
+- **Backend**: GitHub with repository and branch settings
+- **Media Storage**: Images uploaded through the CMS are stored in `static/images/`
+- **Collections**:
+  - **Posts**: Blog posts in `content/posts/` with fields for title, date, and markdown content
+  - **Pages**: Static pages like About page in `content/about.md`
+
+#### Access URL
+- **Production**: `https://joewebber.co.uk/admin/`
+- **Local Development**: `http://localhost:1313/admin/`
+
+#### How It Works
+1. User navigates to the `/admin/` endpoint
+2. Decap CMS loads from CDN (`https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js`)
+3. User authenticates via GitHub OAuth
+4. GitHub verifies the user has write access to the repository
+5. User can create/edit content through the visual interface
+6. Changes are committed directly to the repository
+7. GitHub Actions automatically rebuilds and deploys the site
+
+#### Security
+- GitHub OAuth ensures only authorized users can access the CMS
+- Repository permissions control who can make changes
+- All changes are tracked in Git history
+- No credentials or secrets are stored in the codebase
+
+#### Maintenance
+- **CMS Version**: 3.x (loaded from CDN with semver range `^3.0.0`)
+- **Updates**: The CMS automatically uses the latest 3.x version from unpkg
+- **Configuration Changes**: Edit `static/admin/config.yml` to modify collections, fields, or settings
+
+#### CMS Files
+- `static/admin/index.html` - Entry point for the CMS interface
+- `static/admin/config.yml` - CMS configuration
+- `static/images/` - Media upload directory
+
 ## Templates and Layout
 
 ### Template Hierarchy
@@ -135,16 +188,26 @@ hugo server
 
 # Available at http://localhost:1313
 # LiveReload enabled for automatic refresh
+
+# Access CMS admin interface at http://localhost:1313/admin/
 ```
 
 ### Creating New Content
 
+#### Via Command Line
 ```bash
 # Create a new blog post
 hugo new posts/my-new-post.md
 
 # Remember to set draft: false when ready to publish
 ```
+
+#### Via Decap CMS
+1. Navigate to `http://localhost:1313/admin/` (local) or `https://joewebber.co.uk/admin/` (production)
+2. Authenticate with GitHub
+3. Click "New Posts" or edit existing content
+4. Use the visual editor to write content
+5. Click "Publish" to commit changes
 
 ### Building for Production
 
@@ -205,6 +268,7 @@ Two deployment workflows are configured:
 5. **SEO Ready**: Meta tags, semantic HTML
 6. **Fast Performance**: Static site generation for optimal speed
 7. **Simple Deployment**: Automated via GitHub Actions
+8. **User-Friendly CMS**: Decap CMS for non-technical content editing
 
 ## Content Guidelines
 
@@ -236,17 +300,32 @@ Since this is a Hugo static site with no tests:
 
 ### Adding a New Blog Post
 
+#### Option 1: Command Line
 1. Create file: `hugo new posts/post-title.md`
 2. Edit content in `content/posts/post-title.md`
 3. Set `draft: false` in front matter
 4. Commit and push to `main` branch
 5. GitHub Actions will automatically deploy
 
+#### Option 2: Decap CMS (Recommended for Non-Technical Users)
+1. Navigate to `https://joewebber.co.uk/admin/`
+2. Authenticate with GitHub
+3. Click "New Posts"
+4. Fill in the form with title, date, and content
+5. Click "Publish" - changes are automatically committed and deployed
+
 ### Updating the About Page
 
+#### Via Command Line
 1. Edit `content/about.md`
 2. Keep front matter structure
 3. Commit and push changes
+
+#### Via Decap CMS
+1. Navigate to `https://joewebber.co.uk/admin/`
+2. Click on "Pages" → "About"
+3. Edit content in the visual editor
+4. Click "Publish"
 
 ### Modifying Site Configuration
 
@@ -261,6 +340,16 @@ Since this is a Hugo static site with no tests:
 3. No build step needed for CSS
 4. Commit and push changes
 
+### Managing CMS Configuration
+
+1. Edit `static/admin/config.yml` to modify:
+   - Collections (content types)
+   - Fields for each content type
+   - Media folder location
+   - Backend settings
+2. Test locally by accessing `/admin/`
+3. Commit and push changes
+
 ## Dependencies
 
 ### Required for Development
@@ -273,6 +362,7 @@ Since this is a Hugo static site with no tests:
 - GitHub account with Pages enabled
 - GitHub Actions enabled
 - DNS configured for custom domain (if using)
+- Repository write access for CMS users
 
 ### Optional Tools
 
@@ -291,3 +381,8 @@ Since this is a Hugo static site with no tests:
 - The .instructions.md file contains extensive Hugo documentation for reference
 - Always test changes locally before committing if possible
 - The site owner focuses on career development and tech leadership content
+- **Decap CMS is integrated** for user-friendly content editing via web interface
+  - Access at `/admin/` endpoint
+  - Uses GitHub OAuth for authentication
+  - Only repository collaborators with write access can use the CMS
+  - Changes made through CMS are committed directly to the repository
