@@ -37,14 +37,21 @@ This site uses [Decap CMS](https://decapcms.org/) for content management.
 2. Authenticate with your GitHub account
 3. Start creating and editing content
 
+### Authentication & Access Control
+
+The CMS uses GitHub OAuth for authentication. **Only users with write access to the `joewebber/joewebber-co-uk` repository can access and use the CMS.** This is controlled at the GitHub repository level through:
+- Repository collaborators with write permissions
+- Organization team members with write access
+- Repository owners
+
+To ensure only you can access the admin screen, make sure no other users have write access to your GitHub repository. You can verify this in your repository settings under "Collaborators and teams" or "Manage access".
+
 ### CMS Features
 
 - Edit posts and pages through a user-friendly interface
 - Add new blog posts without touching code
 - Upload and manage images
 - Preview content before publishing
-
-**Note:** You need write access to the GitHub repository to use the CMS.
 
 ## Deployment
 
