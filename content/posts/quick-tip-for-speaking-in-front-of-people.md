@@ -1,6 +1,6 @@
 ---
 title: Quick tip for speaking in front of people
-date: 2025-11-10
+date: 2025-10-17
 ---
 
 Quick tip for speaking in front of people for overthinking introverts.
