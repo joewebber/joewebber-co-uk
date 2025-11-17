@@ -4,6 +4,7 @@
   {{ range .Pages }}
   <article>
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <time>{{ .Date.Format "02 Jan 2006" }}</time>
     <p>{{ .Summary }}</p>
   </article>
   {{ end }}
