@@ -1,13 +1,19 @@
 {{ define "main" }}
 {{ partial "header.html" . }}
-<main>
+<main class="post-list">
   {{ range .Pages }}
   <article>
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
     <time>{{ .Date.Format "02 Jan 2006" }}</time>
-    <div class="post-content">
-      {{ .Content }}
-    </div>
+    {{ if eq .Section "posts" }}
+      <div class="post-content">
+        {{ .Content }}
+      </div>
+    {{ else }}
+      <p>
+      {{ .Summary }}
+      </p>
+    {{ end }}
   </article>
   {{ end }}
 </main>
