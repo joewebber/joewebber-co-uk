@@ -22,3 +22,8 @@ node_modules/
 
 # Hugo cache
 .hugo_build.lock
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

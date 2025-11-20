@@ -26,6 +26,7 @@ This is the source code for [joewebber.co.uk](https://joewebber.co.uk), built wi
 - `layouts/` — HTML templates (Go templates)
 - `static/` — CSS, images, and other static assets
 - `config.toml` — Site configuration
+- `scripts/` — Utility scripts (e.g., LinkedIn post importer)
 
 ## Content Management
 
@@ -56,6 +57,15 @@ To ensure only you can access the admin screen, make sure no other users have wr
 ## Deployment
 
 Upload the contents of the `public/` folder to your web server or use a static hosting service (Netlify, Vercel, GitHub Pages, etc).
+
+## Importing LinkedIn Posts
+
+You can import LinkedIn posts as articles using the CSV import script. See [`scripts/README.md`](scripts/README.md) for detailed instructions.
+
+Quick start:
+```sh
+python3 scripts/import_linkedin_posts.py linkedin_posts.csv
+```
 
 ## License
 
