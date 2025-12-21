@@ -2,8 +2,10 @@
 title: "Home"
 ---
 
-Hi, I'm Joe - a Software Engineer turned Chief Product Officer based in Exeter, UK. I've spent a large portion of my career in hands-on management roles, both working on code and leading compact teams of Developers and Engineers.
+Hi, I'm Joe.
 
-Nowadays, I'm more of a strategic tech leader focused on business goals, building and scaling teams and helping Developers/Engineers with their career progression.
+When I was young and searching for a career direction, I discovered I like building things and putting them on the Internet. You can see my first ever attempt (online from around 1999-2002) [here](https://web.archive.org/web/20091027003738/http://uk.geocities.com/Joewebber1000/CZM.htm).
+
+I started off building websites and moved on to web applications. Since then, I've made a career out of organising people to build websites and applications that other people need.
 
 On this site you'll find [posts](/posts) (short, social media style writing/media or links) and [articles](articles) (long form writing, less frequent).
