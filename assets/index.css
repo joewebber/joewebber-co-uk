@@ -1,6 +1,6 @@
 /* settings  */
 @layer base, components;
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+NZ+Guides&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand&display=swap");
 
 @layer base {
   :root {
@@ -8,7 +8,7 @@
     --color-light: 242 242 242;
     --color-primary: 71 160 180;
     --color-secondary: 228 156 95;
-    --logo-font: "Playwrite NZ Guides", cursive;
+    --logo-font: "Inter Tight", sans-serif;
     --serif-font: "PT Serif", serif;
   }
 
@@ -55,7 +55,7 @@
 
   @media (min-width: 768px) {
     main {
-      max-width: 768px;
+      max-width: 1024px;
       margin: 0 auto;
     }
   }
@@ -70,7 +70,7 @@
 
   @media (min-width: 768px) {
     .header {
-      max-width: 768px;
+      max-width: 1024px;
       margin: 0 auto;
     }
   }
@@ -78,7 +78,7 @@
   .logo {
     display: flex;
     width: 100%;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.75rem;
     font-weight: 300;
     color: rgb(var(--color-dark));
@@ -98,7 +98,7 @@
   }
 
   nav ul li a {
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.75rem;
     font-weight: 300;
     font-family: var(--logo-font);
@@ -110,11 +110,31 @@
     color: rgb(var(--color-primary));
   }
 
+  @media (min-width: 768px) {
+    .index-main .content {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  .index-main .recent-posts {
+    margin-top: 4rem;
+    border-top: 1px solid rgb(var(--color-dark) / 0.6);
+    padding-top: 2rem;
+  }
+
   .hero-image {
-    height: 300px;
-    margin: 0 auto;
     display: block;
-    width: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image {
+      height: 400px;
+      width: auto;
+    }
   }
 
   .container {
@@ -125,15 +145,31 @@
     margin: 2rem auto;
   }
 
-  .footerContainer {
+  footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 50%;
-    margin: 2rem auto;
+    width: 90%;
+    margin: 2rem 5%;
     border-top: 1px solid rgb(var(--color-dark) / 0.6);
+  }
+
+  footer p {
+    font-family: var(--logo-font);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+    color: rgb(var(--color-dark));
+    flex-grow: 1;
+  }
+
+  @media (min-width: 768px) {
+    .footerContainer {
+      max-width: 1024px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   article {
@@ -166,7 +202,7 @@
 
   article h2 {
     font-size: 2.5rem;
-    line-height: 1.75rem;
+    line-height: 3rem;
     margin-top: 3rem;
     margin-bottom: 1rem;
     color: rgb(var(--color-primary));
@@ -228,7 +264,7 @@
   }
 
   .list li {
-    margin-right: 1.5rem;
+    margin-right: 1.25rem;
   }
 
   .list li:last-child {
