@@ -1,26 +1,20 @@
 /* settings  */
 @layer base, components;
-@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand&display=swap");
 
 @layer base {
   :root {
-    --color-dark: 32 26 41;
-    --color-light: 236 236 236;
+    --color-dark: 0 0 0;
+    --color-light: 242 242 242;
     --color-primary: 71 160 180;
     --color-secondary: 228 156 95;
-    --sans-font: "Inter", sans-serif;
+    --logo-font: "Inter Tight", sans-serif;
     --serif-font: "PT Serif", serif;
-    --logo-font: "Quicksand", sans-serif;
   }
 
   body {
-    color: rgb(var(--color-light));
-    background: rgb(32, 26, 41);
-    background: radial-gradient(
-      circle,
-      rgba(32, 26, 41, 1) 50%,
-      rgba(23, 25, 38, 1) 100%
-    );
+    color: rgb(var(--color-dark));
+    background: rgb(var(--color-light));
   }
 
   a {
@@ -61,7 +55,7 @@
 
   @media (min-width: 768px) {
     main {
-      max-width: 768px;
+      max-width: 1024px;
       margin: 0 auto;
     }
   }
@@ -76,7 +70,7 @@
 
   @media (min-width: 768px) {
     .header {
-      max-width: 768px;
+      max-width: 1024px;
       margin: 0 auto;
     }
   }
@@ -84,18 +78,10 @@
   .logo {
     display: flex;
     width: 100%;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.75rem;
-    font-weight: 600;
-    color: rgb(var(--color-light));
-    font-family: var(--sans-font);
-  }
-
-  .logo span {
-    margin-top: -0.7rem;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    color: rgb(var(--color-primary));
+    font-weight: 300;
+    color: rgb(var(--color-dark));
     font-family: var(--logo-font);
   }
 
@@ -113,15 +99,42 @@
 
   nav ul li a {
     font-size: 1rem;
-    line-height: 1.5rem;
+    line-height: 1.75rem;
     font-weight: 300;
-    font-family: var(--sans-font);
-    color: rgb(var(--color-light));
+    font-family: var(--logo-font);
+    color: rgb(var(--color-dark));
     text-decoration: none;
   }
 
   nav ul li a:hover {
     color: rgb(var(--color-primary));
+  }
+
+  @media (min-width: 768px) {
+    .index-main .content {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  .index-main .recent-posts {
+    margin-top: 4rem;
+    border-top: 1px solid rgb(var(--color-dark) / 0.6);
+    padding-top: 2rem;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image {
+      height: 400px;
+      width: auto;
+    }
   }
 
   .container {
@@ -132,20 +145,36 @@
     margin: 2rem auto;
   }
 
-  .footerContainer {
+  footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 50%;
-    margin: 2rem auto;
-    border-top: 1px solid rgb(var(--color-light) / 0.6);
+    width: 90%;
+    margin: 2rem 5%;
+    border-top: 1px solid rgb(var(--color-dark) / 0.6);
+  }
+
+  footer p {
+    font-family: var(--logo-font);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+    color: rgb(var(--color-dark));
+    flex-grow: 1;
+  }
+
+  @media (min-width: 768px) {
+    .footerContainer {
+      max-width: 1024px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   article {
     font-family: var(--serif-font);
-    border-bottom: 1px solid rgb(var(--color-light) / 0.6);
+    border-bottom: 1px solid rgb(var(--color-dark) / 0.6);
     padding-bottom: 2rem;
     margin-bottom: 2rem;
   }
@@ -173,7 +202,7 @@
 
   article h2 {
     font-size: 2.5rem;
-    line-height: 1.75rem;
+    line-height: 3rem;
     margin-top: 3rem;
     margin-bottom: 1rem;
     color: rgb(var(--color-primary));
@@ -191,7 +220,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 300;
-    color: rgb(var(--color-light));
+    color: rgb(var(--color-dark));
     margin-bottom: 1rem;
     font-family: var(--sans-font);
   }
@@ -205,7 +234,7 @@
 
   .post-header {
     margin-bottom: 2rem;
-    border-bottom: 1px solid rgb(var(--color-light) / 0.6);
+    border-bottom: 1px solid rgb(var(--color-dark) / 0.6);
     padding-bottom: 1rem;
   }
 
@@ -213,7 +242,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 300;
-    color: rgb(var(--color-light));
+    color: rgb(var(--color-dark));
     margin-bottom: 0.5rem;
     font-family: var(--sans-font);
   }
@@ -235,7 +264,7 @@
   }
 
   .list li {
-    margin-right: 1.5rem;
+    margin-right: 1.25rem;
   }
 
   .list li:last-child {
@@ -247,7 +276,7 @@
   }
 
   .list li svg {
-    fill: rgb(var(--color-light) / 1);
+    fill: rgb(var(--color-dark) / 1);
     width: 2rem;
   }
 }

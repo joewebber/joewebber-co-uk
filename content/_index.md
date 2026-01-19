@@ -2,10 +2,8 @@
 title: "Home"
 ---
 
-Hi, I'm Joe.
+I'm Joe - a Product and Technology leader based in Exeter, UK. I've spent a large portion of my career in hands-on management roles, both working on code and leading teams of Developers and Engineers.
 
-When I was young and searching for a career direction, I discovered I like building things and putting them on the Internet. You can see my first ever attempt (online from around 1999-2002) [here](https://web.archive.org/web/20091027003738/http://uk.geocities.com/Joewebber1000/CZM.htm).
+My interests include (but are not limited to) platform engineering, product strategy, scaling teams and companies, developer experience, music, sport.
 
-I started off building websites and moved on to web applications. Since then, I've made a career out of organising people to build websites and applications that other people need.
-
-On this site you'll find [posts](/posts) (short, social media style writing/media or links) and [articles](articles) (long form writing, less frequent).
+On this site you'll find [posts](/posts) (short, social media style writing/media or links) and [articles](articles) (long form writing, less frequent). I add content about anything that interests me.
