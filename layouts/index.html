@@ -8,18 +8,13 @@
   </section>
 
   <section class="recent-posts">
-    {{ $posts := where .Site.RegularPages "Section" "posts"}}
-    {{ $paginator := .Paginate $posts.ByTitle 5 }}
-
-    {{ range sort ($paginator.Pages) "Date" "desc" }}
+    {{ range first 5 (sort (where .Site.RegularPages "Section" "posts") "Date" "desc") }}
     <article>
       <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       <time>{{ .Date.Format "02 Jan 2006" }}</time>
       <p>{{ .Summary }}</p>
     </article>
     {{ end }}
-
-    {{ partial "pagination.html" (dict "page" . "format" "terse") }}
   </section>
 </main>
 {{ end }}

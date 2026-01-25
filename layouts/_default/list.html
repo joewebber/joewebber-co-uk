@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ partial "header.html" . }}
 <main class="post-list">
-  {{ range .Pages }}
+  {{ range (.Paginate .Pages).Pages }}
   <article>
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
     <time>{{ .Date.Format "02 Jan 2006" }}</time>
@@ -16,5 +16,6 @@
     {{ end }}
   </article>
   {{ end }}
+  {{ partial "pagination.html" . }}
 </main>
 {{ end }}

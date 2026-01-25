@@ -287,7 +287,6 @@
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
-  gap: 0.5rem;
   font-family: var(--serif-font);
   font-size: 1.2rem;
 }
@@ -295,6 +294,7 @@
 .pagination a {
   display: inline-block;
   margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
   text-decoration: none;
   color: rgb(var(--color-primary));
   transition: all 0.3s ease;
@@ -305,13 +305,14 @@
   color: rgb(var(--color-light));
 }
 
-.pagination .page-item.active span {
+.pagination .page-item.active a {
   background-color: rgb(var(--color-primary));
   color: rgb(var(--color-light));
   font-weight: bold;
+  cursor: not-allowed;
 }
 
-.pagination .page-item.disabled span {
+.pagination .page-item.disabled a {
   color: rgb(var(--color-dark) / 0.4);
   background-color: transparent;
   cursor: not-allowed;

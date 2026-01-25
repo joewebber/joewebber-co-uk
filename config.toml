@@ -33,3 +33,7 @@ home = ["HTML", "RSS"]
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[pagination]
+  disableAliases = false
+  pagerSize = 5
