@@ -2,10 +2,17 @@
   <a href="/" class="logo">
     Joe Webber
   </a>
-  <nav>
-    <ul>
-      <li><a href="/posts">Posts</a></li>
-      <li><a href="/articles">Articles</a></li>
-    </ul>
+  <nav role="navigation">
+    <div id="menuToggle">
+      <input type="checkbox" id="menuCheckbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+      <ul id="menu">
+      {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+      </ul>
+    </div>
   </nav>
 </header>

@@ -19,9 +19,25 @@ home = ["HTML", "RSS"]
 
 [menu]
   [[menu.main]]
+    name = "Posts"
+    url = "/posts"
+    weight = 1
+  [[menu.main]]
+    name = "Articles"
+    url = "/articles"
+    weight = 2
+  [[menu.main]]
+    name = "Now"
+    url = "/now"
+    weight = 3
+  [[menu.main]]
     name = "About"
     url = "/about"
-    weight = 1
+    weight = 4
+  [[menu.main]]
+    name = "Inspiration"
+    url = "/inspiration"
+    weight = 5
 
 [permalinks]
   posts = "/posts/:slug/"
