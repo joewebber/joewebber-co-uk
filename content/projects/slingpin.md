@@ -2,6 +2,11 @@
 title: "Slingpin"
 type: "Web/mobile app"
 status: "Abandoned"
+Tech:
+  - NodeJS
+  - React
+  - React Native
+  - Firebase
 ---
 
 Slingpin was based on a problem I encountered with aggregating content from multiple sources. I wanted to collect articles, videos or interesting content in order to focus on it at a later date.
