@@ -7,6 +7,19 @@ media_folder: "static/images"
 public_folder: "/images"
 
 collections:
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Type", name: "type", widget: "string", required: false, hint: "e.g. Tool, Website, Open Source" }
+      - { label: "Status", name: "status", widget: "string", required: false, hint: "e.g. Active, Archived, In Progress" }
+      - { label: "Tech", name: "tech", widget: "list", required: false, hint: "Technologies used, one per item" }
+      - { label: "Link", name: "link", widget: "string", required: false, hint: "URL to the project or codebase" }
+      - { label: "Image", name: "image", widget: "image", required: false, hint: "Displayed on the right in the projects list" }
+      - { label: "Body", name: "body", widget: "markdown" }
   - name: "posts"
     label: "Posts"
     folder: "content/posts"
