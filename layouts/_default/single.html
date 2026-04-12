@@ -4,6 +4,8 @@
   <article>
     {{ if or (eq .Section "posts") (eq .Section "articles") }}
       {{ partial "post-header.html" . }}
+    {{ else if eq .Section "projects" }}
+      {{ partial "project-header.html" . }}
     {{ else }}
       <header class="post-header">
         <h1>{{ .Title }}</h1>

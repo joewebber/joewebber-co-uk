@@ -4,12 +4,19 @@
   {{ range (.Paginate .Pages).Pages }}
   <article>
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    <time>{{ .Date.Format "02 Jan 2006" }}</time>
-    {{ if eq .Section "posts" }}
+    {{ if eq .Section "projects" }}
+      <div class="project-meta">
+        {{ if ne .Type .Section }}<span class="project-type">{{ .Type | title }}</span>{{ end }}
+        {{ if .Params.status }}<span class="project-status">{{ .Params.status }}</span>{{ end }}
+      </div>
+      <p>{{ .Summary }}</p>
+    {{ else if eq .Section "posts" }}
+      <time>{{ .Date.Format "02 Jan 2006" }}</time>
       <div class="post-content">
         {{ .Content }}
       </div>
     {{ else }}
+      <time>{{ .Date.Format "02 Jan 2006" }}</time>
       <p>
       {{ .Summary }}
       </p>

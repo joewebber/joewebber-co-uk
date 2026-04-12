@@ -1,0 +1,7 @@
+<header class="post-header">
+  <div class="project-meta">
+    {{ if ne .Type .Section }}<span class="project-type">{{ .Type | title }}</span>{{ end }}
+    {{ if .Params.status }}<span class="project-status">{{ .Params.status }}</span>{{ end }}
+  </div>
+  <h1>{{ .Title }}</h1>
+</header>

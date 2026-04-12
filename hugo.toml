@@ -1,7 +1,6 @@
 baseURL = "https://joewebber.co.uk/"
 languageCode = "en-gb"
 title = "Joe Webber / Tech & Product Leader"
-author = "Joe Webber"
 copyright = "Joe Webber"
 
 [params]
@@ -25,6 +24,7 @@ home = ["HTML", "RSS"]
 
 [permalinks]
   posts = "/posts/:slug/"
+  projects = "/projects/:slug/"
 
 [markup]
   [markup.goldmark.renderer]

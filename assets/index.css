@@ -259,6 +259,35 @@
     font-size: 1.6rem;
   }
 
+  .project-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-type,
+  .project-status {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-family: var(--logo-font);
+    font-weight: 400;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .project-type {
+    background: rgb(var(--color-primary) / 0.12);
+    color: rgb(var(--color-primary));
+  }
+
+  .project-status {
+    background: rgb(var(--color-secondary) / 0.12);
+    color: rgb(var(--color-secondary));
+  }
+
   .list {
     display: flex;
   }
