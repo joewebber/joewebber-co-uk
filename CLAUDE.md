@@ -79,12 +79,18 @@ Project showcase. No date. Uses `type` and `status` fields instead.
 title: "Project Name"
 type: "tool"        # Shown as a teal badge — e.g. tool, website, open-source
 status: "Active"    # Shown as an orange badge — e.g. Active, Archived, In Progress
+tech:               # Shown as neutral badges on list + single pages
+  - Hugo
+  - Go
+link: "https://github.com/..."  # Optional — shown as "View Project →" on single page
 draft: false
 ---
 ```
 
 - `type` is Hugo's built-in content type field, accessed in templates via `.Type`
 - `status` is a custom param, accessed via `.Params.status`
+- `tech` is a list param, accessed via `range .Params.tech`
+- `link` is optional — only rendered if present
 - Badges only render when values are set
 
 ### Standard front matter (posts + articles)

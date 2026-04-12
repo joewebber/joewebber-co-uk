@@ -2,6 +2,8 @@
   <div class="project-meta">
     {{ if ne .Type .Section }}<span class="project-type">{{ .Type | title }}</span>{{ end }}
     {{ if .Params.status }}<span class="project-status">{{ .Params.status }}</span>{{ end }}
+    {{ range .Params.tech }}<span class="project-tech">{{ . }}</span>{{ end }}
   </div>
   <h1>{{ .Title }}</h1>
+  {{ if .Params.link }}<a href="{{ .Params.link }}" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>{{ end }}
 </header>

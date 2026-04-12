@@ -1,6 +1,9 @@
 {{ define "main" }}
 {{ partial "header.html" . }}
 <main class="post-list">
+  {{ if .Content }}
+  <div class="section-intro">{{ .Content }}</div>
+  {{ end }}
   {{ range (.Paginate .Pages).Pages }}
   <article>
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
@@ -8,6 +11,7 @@
       <div class="project-meta">
         {{ if ne .Type .Section }}<span class="project-type">{{ .Type | title }}</span>{{ end }}
         {{ if .Params.status }}<span class="project-status">{{ .Params.status }}</span>{{ end }}
+        {{ range .Params.tech }}<span class="project-tech">{{ . }}</span>{{ end }}
       </div>
       <p>{{ .Summary }}</p>
     {{ else if eq .Section "posts" }}
