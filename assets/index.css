@@ -294,6 +294,37 @@
     color: rgb(var(--color-dark) / 0.6);
   }
 
+  .post-list article.project-has-image {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .project-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .project-thumbnail {
+    flex-shrink: 0;
+    width: 200px;
+    height: auto;
+    border-radius: 0.25rem;
+    object-fit: cover;
+  }
+
+  @media (max-width: 767px) {
+    .post-list article.project-has-image {
+      flex-direction: column;
+    }
+
+    .project-thumbnail {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+    }
+  }
+
   .project-link {
     display: inline-block;
     margin-top: 0.75rem;

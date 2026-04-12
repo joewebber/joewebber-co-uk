@@ -5,16 +5,25 @@
   <div class="section-intro">{{ .Content }}</div>
   {{ end }}
   {{ range (.Paginate .Pages).Pages }}
-  <article>
-    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    {{ if eq .Section "projects" }}
+  {{ if eq .Section "projects" }}
+  <article{{ if .Params.image }} class="project-has-image"{{ end }}>
+    <div class="project-body">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       <div class="project-meta">
         {{ if ne .Type .Section }}<span class="project-type">{{ .Type | title }}</span>{{ end }}
         {{ if .Params.status }}<span class="project-status">{{ .Params.status }}</span>{{ end }}
         {{ range .Params.tech }}<span class="project-tech">{{ . }}</span>{{ end }}
       </div>
       <p>{{ .Summary }}</p>
-    {{ else if eq .Section "posts" }}
+    </div>
+    {{ if .Params.image }}
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" class="project-thumbnail" loading="lazy" />
+    {{ end }}
+  </article>
+  {{ else }}
+  <article>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ if eq .Section "posts" }}
       <time>{{ .Date.Format "02 Jan 2006" }}</time>
       <div class="post-content">
         {{ .Content }}
@@ -26,6 +35,7 @@
       </p>
     {{ end }}
   </article>
+  {{ end }}
   {{ end }}
   {{ template "_internal/pagination.html" . }}
 </main>

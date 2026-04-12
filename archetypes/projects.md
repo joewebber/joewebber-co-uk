@@ -4,5 +4,6 @@ type: ""
 status: ""
 tech: []
 link: ""
+image: ""
 draft: true
 ---
