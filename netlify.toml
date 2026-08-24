@@ -1,20 +1,9 @@
 [build]
-  publish = "public"
-  command = "hugo --minify"
+  publish = "dist"
+  command = "npm run build"
 
 [build.environment]
-  HUGO_VERSION = "0.160.1"
-  HUGO_ENVIRONMENT = "production"
-  HUGO_ENABLEGITINFO = "true"
-
-[context.production.environment]
-  HUGO_ENV = "production"
-
-[context.deploy-preview]
-  command = "hugo --minify --buildFuture -b $DEPLOY_PRIME_URL"
-
-[context.branch-deploy]
-  command = "hugo --minify -b $DEPLOY_PRIME_URL"
+  NODE_VERSION = "24"
 
 [[headers]]
   for = "/*"

@@ -2,156 +2,99 @@
 
 ## Overview
 
-Personal website for Joe Webber ([joewebber.co.uk](https://joewebber.co.uk)), a Software Engineer turned Chief Product Officer based in Exeter, UK. Built with Hugo and deployed via Netlify.
+Personal website for Joe Webber ([joewebber.co.uk](https://joewebber.co.uk)), a Software Engineer turned Chief Product Officer based in Exeter, UK. A plain static site (no framework, no SSG) built and served with Vite, deployed via Netlify.
+
+The site is a single scrolling one-page design (dark theme) with five sections: Intro, Playground (personal projects), Professional, Talks / Media, and Contact. All copy is hardcoded directly in `index.html` — there is no content collection or CMS.
 
 ## Technology Stack
 
-- **Static Site Generator**: Hugo v0.160.1
-- **Config file**: `hugo.toml`
-- **Markup**: Markdown
-- **Templating**: Go HTML templates
-- **Styling**: Custom CSS (`assets/index.css`) — processed via Hugo Pipes with fingerprinting
+- **Build tool**: Vite (dev server + production bundling/minification/hashing)
+- **Markup**: Plain HTML — `index.html` at the repo root
+- **Styling**: Plain CSS (`src/style.css`)
+- **JS**: Vanilla JS, no dependencies (`src/main.js`), loaded as an ES module
 - **Deployment**: Netlify (config in `netlify.toml`)
-- **Content Management**: Decap CMS (`static/admin/`)
 - **Domain**: joewebber.co.uk
 
 ## Project Structure
 
 ```
 /
-├── archetypes/
-│   ├── default.md           # Default archetype for new content
-│   └── projects.md          # Archetype for new projects (includes type + status)
-├── assets/
-│   └── index.css            # Main stylesheet (Hugo Pipes + fingerprint)
-├── content/
-│   ├── _index.md            # Homepage content
-│   ├── articles/            # Long-form articles
-│   ├── posts/               # Short posts (shown in full on list page)
-│   └── projects/            # Projects (type + status fields, no date)
-│       └── _index.md
-├── layouts/
-│   ├── _default/
-│   │   ├── baseof.html      # Base template
-│   │   ├── list.html        # List pages (handles posts/articles/projects differently)
-│   │   └── single.html      # Single page
-│   ├── partials/
-│   │   ├── header.html      # Site header + nav (Projects, Posts, Articles)
-│   │   ├── post-header.html # Header for posts and articles (shows date)
-│   │   ├── project-header.html # Header for projects (shows type + status badges)
-│   │   └── footer.html      # Footer with social links
-│   └── index.html           # Homepage template
-├── static/
-│   ├── admin/
-│   │   ├── index.html       # Decap CMS entry point
-│   │   └── config.yml       # Decap CMS configuration
-│   ├── images/              # Media uploads
-│   └── CNAME
-├── hugo.toml                # Hugo site configuration
-├── netlify.toml             # Netlify build + deployment config
+├── index.html          # The entire page — all sections, hardcoded content
+├── src/
+│   ├── style.css        # Entire stylesheet
+│   ├── main.js          # Clock, scroll-spy nav, drag interaction
+│   ├── pixel-field.js    # <pixel-field> custom element — dissolving noise-grid background
+│   ├── pixel-drift.js    # <pixel-drift> custom element — drifting pixel-art icons
+│   └── pixel-trail.js    # <pixel-trail> custom element — cursor pixel trail
+├── public/               # Passed through to the build output as-is
+│   ├── CNAME
+│   ├── icons/            # Pixel-art SVGs used as mask-images by <pixel-drift>
+│   └── images/
+├── package.json
+├── netlify.toml          # Netlify build + deployment config
 └── CNAME
 ```
 
-## Site Configuration (`hugo.toml`)
+There is no `content/` directory, no templating engine, and no CMS — the previous multi-page Hugo site (and before that, a one-page Hugo redesign) was replaced with this plain static page. To change copy, edit `index.html` directly.
 
-- **Base URL**: https://joewebber.co.uk/
-- **Language**: `en-gb`
-- **Copyright**: Joe Webber
-- **Permalinks**: `/posts/:slug/`, `/projects/:slug/`
-- **Pagination**: 5 items per page (`pagination.pagerSize`)
-- **RSS**: enabled for homepage
-- **View transitions**: enabled (`params.viewTransitions`)
-- **Unsafe HTML in Markdown**: enabled (`markup.goldmark.renderer.unsafe`)
+## Page Sections (`index.html`)
 
-## Content Types
+All five sections live in one file, identified by `id` (used for anchor links/scroll) and `data-sec` (used by the scroll-spy JS to highlight the active nav rail item):
 
-### Posts (`content/posts/`)
-Short social-media-style writing. Shown in **full** on the list page. Requires `date`.
+| # | id             | Content |
+|---|----------------|---------|
+| 00 | `#intro`        | Hero heading, two intro paragraphs, a 4-column stat grid |
+| 01 | `#playground`   | Draggable project card collage (real project: Slingpin) plus two "reserved" placeholder slots and a decorative "poke me" circle |
+| 02 | `#professional`  | Career copy (3-column prose grid) and a pull-quote |
+| 03 | `#talks`        | Table of talks/media rows — currently all placeholder ("TBC") entries |
+| 04 | `#contact`      | LinkedIn and GitHub links |
 
-### Articles (`content/articles/`)
-Long-form writing. Shown as **summary** on the list page. Requires `date`.
+The fixed left-hand nav rail and fixed header (name, role, live UK clock) are outside `<main>` in the same file.
 
-### Projects (`content/projects/`)
-Project showcase. No date. Uses `type` and `status` fields instead.
+## Styling (`src/style.css`)
 
-```yaml
----
-title: "Project Name"
-type: "tool"        # Shown as a teal badge — e.g. tool, website, open-source
-status: "Active"    # Shown as an orange badge — e.g. Active, Archived, In Progress
-tech:               # Shown as neutral badges on list + single pages
-  - Hugo
-  - Go
-link: "https://github.com/..."  # Optional — shown as "View Project →" on single page
-draft: false
----
-```
+- Uses CSS `@layer base, layout, components`
+- Dark theme: `--bg: #0a0c11`, `--fg: #eceef3`, accent `--accent: oklch(0.78 0.19 95)` (amber/gold)
+- Fonts: Archivo (body), Bebas Neue (display/headings), Martian Mono (labels/mono UI text) — loaded via Google Fonts `@import`
+- Responsive breakpoint at 900px (nav rail hides) and smaller breakpoints for stat grid / talks rows
+- **Cascade layer gotcha**: because layers are declared `base, layout, components` (in that order), a rule in a later-declared layer always wins over an earlier one for the same property/selector, regardless of media-query specificity. Responsive overrides for anything defined in the `components` layer (e.g. `.site-nav`) must themselves live in `components`, placed after the base rule — see the "responsive overrides" block at the end of that layer in `src/style.css`.
 
-- `type` is Hugo's built-in content type field, accessed in templates via `.Type`
-- `status` is a custom param, accessed via `.Params.status`
-- `tech` is a list param, accessed via `range .Params.tech`
-- `link` is optional — only rendered if present
-- Badges only render when values are set
+## Behaviour (`src/main.js`)
 
-### Standard front matter (posts + articles)
+Vanilla JS, no dependencies, split into small init functions run on `DOMContentLoaded`:
 
-```yaml
----
-title: "Title"
-date: YYYY-MM-DD
-draft: false
----
-```
+- `initClock` — live UK time in the header, updated every 20s
+- `initYear` — fills in the footer's copyright year at runtime
+- `initScrollSpy` — highlights the active nav rail link and fills the rail progress line based on scroll position
+- `initDrag` — pointer-event drag interaction for the Playground cards (`#collage [data-drag]`)
 
-## Templates
+`main.js` also imports `pixel-field.js`, `pixel-drift.js` and `pixel-trail.js` for their side effect of registering three custom elements, used in `index.html` as `<pixel-field>`, `<pixel-drift>`, `<pixel-trail>`:
 
-- **list.html**: Posts show full content; Articles show summary + date; Projects show summary + type/status badges (no date)
-- **single.html**: Routes to `post-header.html` for posts/articles, `project-header.html` for projects
-- **post-header.html**: Shows date then title
-- **project-header.html**: Shows type + status badges then title
+- **`<pixel-field>`** — a canvas driven by animated 3D value noise, rendered as a dissolving grid of cells. Density is weighted by position (dense toward the edges, clear where the copy sits) and each cell is tinted along a slowly-rotating amber→navy diagonal ramp. Attributes: `cell`, `accent`, `base`, `density`.
+- **`<pixel-drift>`** — real pixel-art SVG icons (`public/icons/*.svg`, the Streamline Pixel set) applied as CSS `mask-image` on tinted divs, drifting with a sinusoidal float plus mouse-parallax and scroll-parallax, tinted with the same rotating colour ramp as the field. Attributes: `count`, `scale`, `accent`, `base`.
+- **`<pixel-trail>`** — a canvas that emits grid-snapped pixel "bits" from the cursor on `pointermove`, with simple gravity/decay physics, warm (accent) or cool (`#eceef3`) coloured. Attributes: `cell`, `accent`, `rate`.
 
-## Styling
-
-- Single file: `assets/index.css`
-- Uses CSS `@layer base, components`
-- CSS variables: `--color-primary` (teal `71 160 180`), `--color-secondary` (orange `228 156 95`)
-- `.project-type` badge: teal pill; `.project-status` badge: orange pill
-- Google Fonts: Inter Tight, PT Serif, Quicksand
-- Responsive: mobile-first, 768px breakpoint
-
-## Decap CMS
-
-- Access: `https://joewebber.co.uk/admin/`
-- Auth: GitHub OAuth (requires repo write access)
-- Collections: **Projects** (type, status), **Posts** (date), **Articles** (date), **Pages** (homepage)
-- Config: `static/admin/config.yml`
+These three are self-contained Web Components (no dependency on each other or on any external runtime) ported directly from the original Claude Design export rather than reimplemented from scratch — keep them in sync with that source if the design is revisited.
 
 ## Deployment
 
 Netlify builds from `main` branch automatically on push:
-- Build command: `hugo --minify`
-- Publish dir: `public`
-- Hugo version: `0.160.1`
-- Deploy previews and branch deploys are configured
+- Build command: `npm run build`
+- Publish dir: `dist`
+- Node version: 24
 
 ## Development
 
 ```bash
-hugo server        # Start dev server at http://localhost:1313
-hugo new projects/my-project.md   # New project (uses archetypes/projects.md)
-hugo new posts/my-post.md         # New post
-hugo new articles/my-article.md   # New article
-hugo --minify      # Production build → /public
+npm install
+npm run dev       # Start Vite dev server (default http://localhost:5173)
+npm run build      # Production build → /dist
+npm run preview    # Serve the production build locally
 ```
-
-Requires Hugo v0.160.1. On WSL/Linux, install the binary directly from the GitHub releases page — the `apt` package is typically outdated.
 
 ## Notes for AI Agents
 
-- No Node.js, no theme dependencies — all templates are fully custom
-- Config is in `hugo.toml` (not `config.toml`)
-- CSS is in `assets/index.css` (Hugo Pipes), not `static/`
-- No test suite — validate by running `hugo` and checking for build errors
-- The `author` top-level config key has been removed (deprecated in Hugo v0.127)
-- Projects use Hugo's built-in `type` field (`.Type`) — not `.Params.type`
-- When adding new content sections, update: `list.html`, `single.html`, a new partial, `header.html`, `config.yml` (CMS), and `hugo.toml` (permalink)
+- No SSG, no theme dependencies, no content collections — the whole site is `index.html` + `src/style.css` + `src/main.js`
+- No test suite — validate by running `npm run build` and checking for errors, then visually check `npm run dev` output
+- To change copy (project cards, talks rows, professional bio, etc.), edit the relevant section directly in `index.html` — there is intentionally no templating/CMS layer
+- `public/` files are copied to the build output unchanged (used here for `CNAME`) — don't put anything there that needs processing
