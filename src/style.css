@@ -261,7 +261,7 @@
     display: flex;
     gap: 56px;
     flex-wrap: wrap;
-    max-width: 900px;
+    max-width: 450px;
   }
 
   .hero-copy p {
@@ -462,7 +462,7 @@
     margin: 76px 0 0;
     padding-left: 26px;
     border-left: 2px solid var(--accent);
-    max-width: 24ch;
+    max-width: 48ch;
   }
 
   .pull-quote p {
