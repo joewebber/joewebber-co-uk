@@ -441,6 +441,14 @@
     animation: bob 5s ease-in-out infinite;
   }
 
+  .card-link {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
   /* professional */
 
   .prose-grid {
