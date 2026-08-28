@@ -336,7 +336,7 @@
     border: 1px solid var(--border-strong);
     border-radius: 4px;
     box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5);
-    transform: rotate(-2.4deg);
+    transform: rotate(var(--rot, -2.4deg));
   }
 
   .badge-row {
