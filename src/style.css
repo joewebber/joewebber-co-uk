@@ -355,8 +355,8 @@
   }
 
   .badge--type {
-    background: rgba(243, 166, 60, 0.16);
-    color: oklch(0.86 0.14 95);
+    background: rgba(79, 201, 138, 0.16);
+    color: var(--accent);
   }
 
   .badge--status {
