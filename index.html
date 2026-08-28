@@ -29,7 +29,6 @@
       <header class="site-header">
         <span class="site-header__name">Joe Webber</span>
         <span class="site-header__meta">
-          <span>Chief Product Officer</span>
           <span class="site-header__clock" id="clock">UK --:--</span>
         </span>
       </header>
@@ -48,7 +47,7 @@
           <span class="site-nav__num">02</span><span class="site-nav__label">Professional</span>
         </a>
         <a class="site-nav__link" data-rail="3" href="#talks">
-          <span class="site-nav__num">03</span><span class="site-nav__label">Talks / Media</span>
+          <span class="site-nav__num">03</span><span class="site-nav__label">Media</span>
         </a>
         <a class="site-nav__link" data-rail="4" href="#contact">
           <span class="site-nav__num">04</span><span class="site-nav__label">Contact</span>
@@ -66,7 +65,7 @@
           </div>
           <h1 class="hero-title">I&rsquo;m Joe. This is my corner of the web.</h1>
           <div class="hero-copy">
-            <p>Chief Product Officer at Good Growth. Twenty years in, fifteen of them leading teams. I turn business problems into engineering ones and then hire people better than me to solve them..</p>
+            <p>Twenty years in tech, fifteen of them leading teams. I turn problems into engineering ones and then hire people better than me to solve them. I own more than 70 band t-shirts.</p>
           </div>
           <div class="stat-grid">
             <div class="stat">
@@ -113,20 +112,30 @@
                 <span>&middot; Firebase</span>
               </div>
             </article>
-
-            <div class="card card--slot" data-drag="true" data-rot="3.6">
-              <span class="card--slot-label">Project slot 02</span>
-              <span class="card--slot-note">Reserved for the next thing I abandon.</span>
-            </div>
-
-            <div class="card card--slot card--slot-2" data-drag="true" data-rot="-5">
-              <span class="card--slot-label">Project slot 03</span>
-              <span class="card--slot-note">Unfinished still counts. House rules.</span>
-            </div>
-
-            <div class="card card--dot" data-drag="true" data-rot="-8">
-              Poke me
-            </div>
+            <article class="card card--project" data-drag="true" data-rot="3.6">
+              <div class="badge-row">
+                <span class="badge badge--type">Web app</span>
+                <span class="badge badge--status">In progress</span>
+              </div>
+              <h3 class="card-title">Shelves</h3>
+              <p class="card-desc"></p>
+              <div class="tech-row">
+                <span>NodeJS</span>
+                <span>&middot; React</span>
+              </div>
+            </article>
+            <article class="card card--project" data-drag="true" data-rot="-5.0">
+              <div class="badge-row">
+                <span class="badge badge--type">Web app</span>
+                <span class="badge badge--status">In progress</span>
+              </div>
+              <h3 class="card-title">Breakable</h3>
+              <p class="card-desc"></p>
+              <div class="tech-row">
+                <span>NodeJS</span>
+                <span>&middot; React</span>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -135,13 +144,12 @@
             <span class="section-tag__num">02</span>
             <span>Professional</span>
             <span class="section-tag__rule"></span>
-            <span>Draft copy</span>
           </div>
           <h2 class="section-title" style="max-width: 20ch;">Fifteen years of teams, systems and decisions.</h2>
           <div class="prose-grid">
-            <p>I wanted to be a designer and learned to code as a workaround. The workaround became the career. Frontend, backend, cloud: I learn exactly enough of each to build the thing, then stop.</p>
-            <p>Prototyping, solving and architecting is the part I actually enjoy, which turns out to be management. I found that out by accident, which is how most people find it out. Fifteen years later: development teams built and scaled, onshore and offshore, and my name on what they ship.</p>
-            <p>Now it is product leadership: technology in service of business value, which in practice means fewer heroics and better defaults. Platforms, golden paths, and the deeply boring infrastructure that lets everyone else look fast.</p>
+            <p>I wanted to be a designer/builder and learned to code as a workaround. The workaround became the career. Frontend, backend, cloud: I learn exactly enough of each to build the thing, then stop.</p>
+            <p>Prototyping, solving and architecting is the part I actually enjoy, which turns out to be management. I found that out by accident, which is how most people find it out. Fifteen years later: development teams built and scaled, onshore and offshore.</p>
+            <p>Now it is product leadership: technology in service of value, which in practice means fewer heroics and better defaults. Platforms, golden paths, and the deeply boring infrastructure that lets everyone else look fast.</p>
           </div>
           <blockquote class="pull-quote">
             <p>Whether you write code or lead people, your career is something you get to shape.</p>
@@ -151,32 +159,36 @@
         <section id="talks" data-sec="3">
           <div class="section-tag">
             <span class="section-tag__num">03</span>
-            <span>Talks / Media</span>
+            <span>Media</span>
             <span class="section-tag__rule"></span>
-            <span>Awaiting details</span>
           </div>
           <h2 class="section-title">Decks, write-ups, podcasts.</h2>
           <div class="talks-list">
             <a class="talks-row" href="#talks">
               <span class="talks-row__num">01</span>
-              <span class="talks-row__title">Slide deck &mdash; title to confirm</span>
-              <span class="talks-row__venue">Venue TBC</span>
+              <span class="talks-row__title">Talk &mdash; platform engineering</span>
+              <span class="talks-row__venue">Birmingham Tech Week 2025</span>
               <span class="talks-row__cta">Deck &rarr;</span>
             </a>
             <a class="talks-row" href="#talks">
               <span class="talks-row__num">02</span>
-              <span class="talks-row__title">Write-up &mdash; platform engineering</span>
-              <span class="talks-row__venue">Self-published</span>
-              <span class="talks-row__cta">Read &rarr;</span>
+              <span class="talks-row__title">Talk &mdash; how to break production</span>
+              <span class="talks-row__venue">Birmingham Rubber Duck Brum 1.0</span>
+              <span class="talks-row__cta">Deck &rarr;</span>
             </a>
             <a class="talks-row" href="#talks">
               <span class="talks-row__num">03</span>
-              <span class="talks-row__title">Podcast appearance</span>
-              <span class="talks-row__venue">Show / episode TBC</span>
+              <span class="talks-row__title">Write-up &mdash; choosing your career path</span>
+              <span class="talks-row__venue">Self-published</span>
+              <span class="talks-row__cta">Read &rarr;</span>
+            </a>
+            <a class="talks-row" href="https://evolutionjobs.com/exchange/evo-uk-166-scaling-healthy-teams-staying-connected-remotely/">
+              <span class="talks-row__num">04</span>
+              <span class="talks-row__title">Podcast appearance &mdash; Scaling Healthy Teams & Staying Connected Remotely</span>
+              <span class="talks-row__venue">Evolution Exchnge</span>
               <span class="talks-row__cta">Listen &rarr;</span>
             </a>
           </div>
-          <p class="talks-note">Three rows, waiting on titles, venues and links. The talks happened; the admin did not.</p>
         </section>
 
         <section id="contact" data-sec="4">
