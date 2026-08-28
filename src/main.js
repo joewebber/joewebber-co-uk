@@ -24,12 +24,14 @@ import "./pixel-trail.js";
     var secs = Array.prototype.slice.call(document.querySelectorAll("[data-sec]"));
     var rails = Array.prototype.slice.call(document.querySelectorAll("[data-rail]"));
     var fill = document.getElementById("nav-fill");
+    var bar = document.getElementById("progress-bar");
     if (!secs.length) return;
 
     function sync() {
       var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       var p = Math.min(1, Math.max(0, window.scrollY / max));
       if (fill) fill.style.height = (p * 100).toFixed(2) + "%";
+      if (bar) bar.style.width = (p * 100).toFixed(2) + "%";
 
       var mid = window.scrollY + window.innerHeight * 0.4;
       var active = 0;
@@ -53,6 +55,7 @@ import "./pixel-trail.js";
     var el = null, sx = 0, sy = 0, ox = 0, oy = 0, rot = 0, z = 10;
 
     wrap.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch") return;
       var t = e.target.closest("[data-drag]");
       if (!t) return;
       el = t;
