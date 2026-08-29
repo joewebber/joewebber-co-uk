@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article title goes here / Joe Webber</title>
+  <meta name="description" content="One or two sentences summarising the article, used as the page description and social preview." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0c11'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23f3c065' font-family='monospace'%3EJ%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<!--
+  Article layout template.
+
+  This is a standalone page — there's no CMS or content collection, so to
+  publish a new article, copy this file to a new name at the repo root
+  (e.g. choosing-your-career-path.html) and edit the content below directly,
+  then link to it from the Media table in index.html (#talks) and add it to
+  the `input` list in vite.config.js so it's included in the production build.
+
+  Everything inside .article-body is free-form prose HTML — headings (h2/h3),
+  paragraphs, lists, blockquotes, inline/block code and figures are all
+  styled. Swap the placeholder copy below for the real article.
+-->
+
+<body class="is-article">
+  <div class="site">
+
+    <div class="bg-layer bg-field" aria-hidden="true">
+      <pixel-field cell="11" accent="oklch(0.75 0.19 155)" base="#2c3550" density="1"></pixel-field>
+    </div>
+    <div class="bg-layer bg-drift" aria-hidden="true">
+      <pixel-drift count="10" scale="1" accent="oklch(0.75 0.19 155)" base="#2c3550"></pixel-drift>
+    </div>
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-trail" aria-hidden="true">
+      <pixel-trail cell="7" accent="oklch(0.75 0.19 155)" rate="1"></pixel-trail>
+    </div>
+
+    <div class="site-inner">
+
+      <div class="site-progress" id="progress-bar" aria-hidden="true"></div>
+
+      <header class="site-header">
+        <span class="site-header__name">Joe Webber</span>
+        <span class="site-header__meta">
+          <span class="site-header__clock" id="clock">UK --:--</span>
+        </span>
+      </header>
+
+      <main class="page page--article">
+
+        <a class="article-back" href="/#talks">
+          <span class="article-back__arrow">&larr;</span>
+          <span>Back to joewebber.co.uk</span>
+        </a>
+
+        <article class="article">
+          <div class="section-tag">
+            <span class="section-tag__num">Article</span>
+            <span>Category</span>
+            <span class="section-tag__rule"></span>
+            <span>Self-published</span>
+          </div>
+
+          <h1 class="article-title">Article title goes here</h1>
+          <div class="article-meta">
+            <span>Joe Webber</span>
+            <span>&middot;</span>
+            <span>1 Jan 2026</span>
+            <span>&middot;</span>
+            <span>5 min read</span>
+          </div>
+
+          <p class="lede">The lede: one or two sentences that set up what the piece is actually about, in plain language, before the reader commits to the rest of it.</p>
+
+          <div class="article-body">
+            <p>Opening paragraph. This is where the argument starts — short sentences, direct claims, nothing that needs a diagram to understand yet.</p>
+
+            <p>A second paragraph can sit right underneath it. Body copy wraps at a comfortable measure regardless of viewport width, so long-form text stays readable even though the rest of the site runs edge to edge.</p>
+
+            <h2>A section heading</h2>
+
+            <p>Use <code>&lt;h2&gt;</code> for the major sections of the piece and <code>&lt;h3&gt;</code> for anything nested underneath one. Inline code like <code>this</code> is also styled, for the odd technical aside.</p>
+
+            <blockquote class="pull-quote">
+              <p>A short, quotable line can be pulled out like this to break up a long section.</p>
+            </blockquote>
+
+            <h3>A minor point worth calling out</h3>
+
+            <p>Lists work too:</p>
+            <ul>
+              <li>First point</li>
+              <li>Second point</li>
+              <li>Third point</li>
+            </ul>
+
+            <figure class="article-figure">
+              <img src="/images/placeholder.jpg" alt="Describe the image for screen readers" />
+              <figcaption>An optional caption, set below the image.</figcaption>
+            </figure>
+
+            <pre><code>// a fenced code block, if the article needs one
+function example() {
+  return true;
+}</code></pre>
+
+            <p>Close with whatever the piece needs to close with — a summary, a call to action, or just the last thought.</p>
+          </div>
+
+          <div class="article-footer">
+            <a class="article-back" href="/#talks">
+              <span class="article-back__arrow">&larr;</span>
+              <span>Back to joewebber.co.uk</span>
+            </a>
+          </div>
+        </article>
+
+      </main>
+
+      <footer class="site-footer">
+        <span>&copy; <span id="year">2026</span> Joe Webber</span>
+        <span class="site-footer__disclaimer">All views and opinions are my own, and do not represent my employer.</span>
+        <span>joewebber.co.uk</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

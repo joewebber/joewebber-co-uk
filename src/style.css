@@ -206,6 +206,10 @@
     display: none;
   }
 
+  body.is-article .site-progress {
+    display: block;
+  }
+
   .section-tag {
     display: flex;
     align-items: center;
@@ -641,6 +645,163 @@
     letter-spacing: 0.06em;
   }
 
+  /* article */
+
+  .page--article {
+    padding: 0 60px;
+    max-width: 900px;
+  }
+
+  .article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 140px 0 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+
+  .article-back:hover {
+    color: var(--accent);
+  }
+
+  .article-back__arrow {
+    color: var(--accent);
+  }
+
+  .article {
+    padding: 40px 0 120px;
+  }
+
+  .article-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(42px, 6.4vw, 88px);
+    line-height: 0.94;
+    margin: 30px 0 20px;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+    margin: 0 0 40px;
+  }
+
+  .article-body {
+    max-width: 68ch;
+    margin-top: 48px;
+  }
+
+  .article-body > * + * {
+    margin-top: 26px;
+  }
+
+  .article-body p {
+    font-size: 17px;
+    line-height: 1.72;
+    color: var(--fg-dim);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height: 1;
+    color: var(--fg);
+    margin: 64px 0 0;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--fg);
+    margin: 48px 0 0;
+  }
+
+  .article-body ul,
+  .article-body ol {
+    margin: 0;
+    padding-left: 22px;
+    color: var(--fg-dim);
+    font-size: 17px;
+    line-height: 1.72;
+  }
+
+  .article-body li + li {
+    margin-top: 10px;
+  }
+
+  .article-body a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-body code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: rgba(236, 238, 243, 0.08);
+    padding: 0.1em 0.4em;
+    border-radius: 2px;
+    color: var(--fg);
+  }
+
+  .article-body pre {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px;
+    overflow-x: auto;
+  }
+
+  .article-body pre code {
+    background: none;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .article-body .pull-quote {
+    margin: 20px 0;
+  }
+
+  .article-figure {
+    margin: 0;
+  }
+
+  .article-figure img {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    display: block;
+  }
+
+  .article-figure figcaption {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-mute);
+  }
+
+  .article-footer {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+  }
+
   /* responsive overrides — kept last in this layer so they win over the
      base component rules above regardless of media-query specificity */
 
@@ -648,11 +809,19 @@
     .page {
       padding: 0 32px 0 200px;
     }
+
+    .page--article {
+      padding: 0 32px;
+    }
   }
 
   @media (max-width: 760px) {
     .page {
       padding: 0 20px;
+    }
+
+    .article-back {
+      margin-top: 104px;
     }
 
     .site-header {

@@ -25,7 +25,7 @@ import "./pixel-trail.js";
     var rails = Array.prototype.slice.call(document.querySelectorAll("[data-rail]"));
     var fill = document.getElementById("nav-fill");
     var bar = document.getElementById("progress-bar");
-    if (!secs.length) return;
+    if (!secs.length && !bar) return;
 
     function sync() {
       var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -33,15 +33,17 @@ import "./pixel-trail.js";
       if (fill) fill.style.height = (p * 100).toFixed(2) + "%";
       if (bar) bar.style.width = (p * 100).toFixed(2) + "%";
 
-      var mid = window.scrollY + window.innerHeight * 0.4;
-      var active = 0;
-      secs.forEach(function (s, i) {
-        if (s.offsetTop <= mid) active = i;
-      });
-      rails.forEach(function (a) {
-        var on = Number(a.getAttribute("data-rail")) === active;
-        a.classList.toggle("is-active", on);
-      });
+      if (secs.length) {
+        var mid = window.scrollY + window.innerHeight * 0.4;
+        var active = 0;
+        secs.forEach(function (s, i) {
+          if (s.offsetTop <= mid) active = i;
+        });
+        rails.forEach(function (a) {
+          var on = Number(a.getAttribute("data-rail")) === active;
+          a.classList.toggle("is-active", on);
+        });
+      }
     }
 
     window.addEventListener("scroll", sync, { passive: true });
