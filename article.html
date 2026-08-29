@@ -11,13 +11,15 @@
 </head>
 
 <!--
-  Article layout template.
+  Article layout template — not built or deployed itself (it's left out of
+  vite.config.js on purpose).
 
-  This is a standalone page — there's no CMS or content collection, so to
-  publish a new article, copy this file to a new name at the repo root
-  (e.g. choosing-your-career-path.html) and edit the content below directly,
-  then link to it from the Media table in index.html (#talks) and add it to
-  the `input` list in vite.config.js so it's included in the production build.
+  There's no CMS or content collection, so to publish a new article: copy
+  this file to articles/<slug>/index.html, edit the content below directly,
+  add that path to the `input` list in vite.config.js so it's included in
+  the production build, and link to it from the Media table in index.html
+  (#talks). The articles/<slug>/ nesting gives it a clean trailing-slash URL
+  (joewebber.co.uk/articles/<slug>/) once deployed.
 
   Everything inside .article-body is free-form prose HTML — headings (h2/h3),
   paragraphs, lists, blockquotes, inline/block code and figures are all
