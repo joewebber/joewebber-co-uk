@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joe Webber / Tech &amp; Product Leader</title>
+  <meta name="description" content="Joe Webber — Chief Product Officer at Good Growth. Fifteen years of pointing technology at business problems." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0c11'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23f3c065' font-family='monospace'%3EJ%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <div class="site">
+
+    <div class="bg-layer bg-field" aria-hidden="true">
+      <pixel-field cell="11" accent="oklch(0.75 0.19 155)" base="#2c3550" density="1"></pixel-field>
+    </div>
+    <div class="bg-layer bg-drift" aria-hidden="true">
+      <pixel-drift count="10" scale="1" accent="oklch(0.75 0.19 155)" base="#2c3550"></pixel-drift>
+    </div>
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-trail" aria-hidden="true">
+      <pixel-trail cell="7" accent="oklch(0.75 0.19 155)" rate="1"></pixel-trail>
+    </div>
+
+    <div class="site-inner">
+
+      <div class="site-progress" id="progress-bar" aria-hidden="true"></div>
+
+      <header class="site-header">
+        <span class="site-header__name">Joe Webber</span>
+        <span class="site-header__meta">
+          <span class="site-header__clock" id="clock">UK --:--</span>
+        </span>
+      </header>
+
+      <nav class="site-nav">
+        <div class="site-nav__rail">
+          <div class="site-nav__fill" id="nav-fill"></div>
+        </div>
+        <a class="site-nav__link" data-rail="0" href="#intro">
+          <span class="site-nav__num">00</span><span class="site-nav__label">Intro</span>
+        </a>
+        <a class="site-nav__link" data-rail="1" href="#playground">
+          <span class="site-nav__num">01</span><span class="site-nav__label">Playground</span>
+        </a>
+        <a class="site-nav__link" data-rail="2" href="#professional">
+          <span class="site-nav__num">02</span><span class="site-nav__label">Professional</span>
+        </a>
+        <a class="site-nav__link" data-rail="3" href="#talks">
+          <span class="site-nav__num">03</span><span class="site-nav__label">Media</span>
+        </a>
+        <a class="site-nav__link" data-rail="4" href="#contact">
+          <span class="site-nav__num">04</span><span class="site-nav__label">Contact</span>
+        </a>
+      </nav>
+
+      <main class="page">
+
+        <section id="intro" data-sec="0">
+          <div class="section-tag">
+            <span class="section-tag__num">00</span>
+            <span>Intro</span>
+            <span class="section-tag__rule"></span>
+            <span>MMXXVI</span>
+          </div>
+          <h1 class="hero-title">I&rsquo;m Joe. This is my corner of the web.</h1>
+          <div class="hero-copy">
+            <p>Twenty years in tech, fifteen of them leading teams. I turn problems into engineering ones and then hire people better than me to solve them. I own more than 70 band t-shirts.</p>
+          </div>
+          <div class="stat-grid">
+            <div class="stat">
+              <span class="stat__label">Who</span>
+              <span class="stat__value">Joe Webber</span>
+            </div>
+            <div class="stat">
+              <span class="stat__label">What</span>
+              <span class="stat__value">Tech &amp; Product Leader</span>
+            </div>
+            <div class="stat">
+              <span class="stat__label">Where</span>
+              <span class="stat__value">Exeter, UK</span>
+            </div>
+            <div class="stat">
+              <span class="stat__label">Since</span>
+              <span class="stat__value">2004</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="playground" data-sec="1">
+          <div class="section-tag">
+            <span class="section-tag__num">01</span>
+            <span>Playground</span>
+            <span class="section-tag__rule"></span>
+            <span>Drag the cards</span>
+          </div>
+          <h2 class="section-title">I like building stuff.</h2>
+          <p class="lede">This is a list of notable stuff I&rsquo;ve worked on in my spare time. These projects are mostly for my own amusement, learning something new or just scratching a particular itch. They are mostly unfinished, but have served some purpose.</p>
+
+          <div class="collage" id="collage">
+            <article class="card card--project" data-drag="true" data-rot="-2.4" style="--rot: -2.4deg;">
+              <div class="badge-row">
+                <span class="badge badge--type">Web/mobile app</span>
+                <span class="badge badge--status">Abandoned</span>
+              </div>
+              <h3 class="card-title">Slingpin</h3>
+              <p class="card-desc">Sling articles, music and video at it, tell it how much time you have, let it choose. I built the API and a PWA that scraped and stored the links, then realised I was making a CRUD app with search and stopped.</p>
+            </article>
+            <article class="card card--project" data-drag="true" data-rot="3.6" style="--rot: 3.6deg;">
+              <div class="badge-row">
+                <span class="badge badge--type">Web app</span>
+                <span class="badge badge--status">Live</span>
+              </div>
+              <h3 class="card-title">Volta Music Studio</h3>
+              <p class="card-desc">A music studio that lives in the browser tab. Built because I wanted to make noise without installing anything that describes itself as a workstation.</p>
+              <a class="card-link" href="https://volta-ms.netlify.app/">View &rarr;</a>
+            </article>
+            <article class="card card--project" data-drag="true" data-rot="-5.0" style="--rot: -5deg;">
+              <div class="badge-row">
+                <span class="badge badge--type">Web app</span>
+                <span class="badge badge--status">Live</span>
+              </div>
+              <h3 class="card-title">Really Simple Times</h3>
+              <p class="card-desc">An RSS reader that sets your feeds as a newspaper: front page, columns, headlines that earn their size. The news looks better when it stops looking like a database.</p>
+              <a class="card-link" href="https://really-simple-times.netlify.app/">View &rarr;</a>
+            </article>
+            <article class="card card--project" data-drag="true" data-rot="-3.0" style="--rot: -3deg;">
+              <div class="badge-row">
+                <span class="badge badge--type">Web app</span>
+                <span class="badge badge--status">In progress</span>
+              </div>
+              <h3 class="card-title">Volta Player</h3>
+              <p class="card-desc">A record collection you can walk around. Sleeves on shelves in 3D, pull one out, drop it on the deck, let it play. The most fun and least finished thing on this page.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="professional" data-sec="2">
+          <div class="section-tag">
+            <span class="section-tag__num">02</span>
+            <span>Professional</span>
+            <span class="section-tag__rule"></span>
+          </div>
+          <h2 class="section-title" style="max-width: 20ch;">Fifteen years of teams, systems and decisions.</h2>
+          <div class="prose-grid">
+            <p>I wanted to be a designer/builder and learned to code as a workaround. The workaround became the career. Frontend, backend, cloud: I learn exactly enough of each to build the thing, then stop.</p>
+            <p>Prototyping, solving and architecting is the part I actually enjoy, which turns out to be management. I found that out by accident, which is how most people find it out. Fifteen years later: development teams built and scaled, onshore and offshore.</p>
+            <p>Now it is product leadership: technology in service of value, which in practice means fewer heroics and better defaults. Platforms, golden paths, and the deeply boring infrastructure that lets everyone else look fast.</p>
+          </div>
+          <blockquote class="pull-quote">
+            <p>Whether you write code or lead people, your career is something you get to shape.</p>
+          </blockquote>
+        </section>
+
+        <section id="talks" data-sec="3">
+          <div class="section-tag">
+            <span class="section-tag__num">03</span>
+            <span>Media</span>
+            <span class="section-tag__rule"></span>
+          </div>
+          <h2 class="section-title">Decks, articles, podcasts.</h2>
+          <div class="talks-list">
+            <a class="talks-row" href="#talks">
+              <span class="talks-row__num">01</span>
+              <span class="talks-row__title">Talk &mdash; platform engineering</span>
+              <span class="talks-row__venue">Birmingham Tech Week 2025</span>
+            </a>
+            <a class="talks-row" href="#talks">
+              <span class="talks-row__num">02</span>
+              <span class="talks-row__title">Talk &mdash; how to break production</span>
+              <span class="talks-row__venue">Rubber Duck Brum 1.0</span>
+            </a>
+            <a class="talks-row" href="/articles/choosing-your-career-path/">
+              <span class="talks-row__num">03</span>
+              <span class="talks-row__title">Article &mdash; choosing your career path</span>
+              <span class="talks-row__venue">Self-published</span>
+              <span class="talks-row__cta">Read &rarr;</span>
+            </a>
+            <a class="talks-row" href="https://evolutionjobs.com/exchange/evo-uk-166-scaling-healthy-teams-staying-connected-remotely/">
+              <span class="talks-row__num">04</span>
+              <span class="talks-row__title">Podcast &mdash; Scaling Healthy Teams & Staying Connected</span>
+              <span class="talks-row__venue">Evolution Exchange</span>
+              <span class="talks-row__cta">Listen &rarr;</span>
+            </a>
+          </div>
+        </section>
+
+        <section id="contact" data-sec="4">
+          <div class="section-tag">
+            <span class="section-tag__num">04</span>
+            <span>Contact</span>
+            <span class="section-tag__rule"></span>
+            <span>End of page</span>
+          </div>
+          <h2 class="contact-title">Say hello<span class="cursor"></span></h2>
+          <div class="contact-links">
+            <a class="contact-link" href="https://www.linkedin.com/in/joe-webber-18254b16/">LinkedIn &nearr;</a>
+            <a class="contact-link" href="https://github.com/joewebber">GitHub &nearr;</a>
+          </div>
+        </section>
+
+        <footer class="site-footer">
+          <span>&copy; <span id="year">2026</span> Joe Webber</span>
+          <span class="site-footer__disclaimer">All views and opinions are my own, and do not represent my employer.</span>
+          <span>joewebber.co.uk</span>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
