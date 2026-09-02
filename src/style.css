@@ -716,7 +716,7 @@
     font-size: 17px;
     line-height: 1.72;
     color: var(--fg-dim);
-    margin: 0;
+    margin: 0 0 16px 0;
     text-wrap: pretty;
   }
 
