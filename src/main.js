@@ -1,3 +1,4 @@
+import posthog from "./posthog.js";
 import "./pixel-field.js";
 import "./pixel-drift.js";
 import "./pixel-trail.js";
@@ -100,10 +101,38 @@ import "./pixel-trail.js";
     if (el) el.textContent = String(new Date().getFullYear());
   }
 
+  function initAnalytics() {
+    document.addEventListener("click", function (e) {
+      if (!posthog.__loaded) return;
+      var link = e.target.closest("a");
+      if (!link) return;
+
+      if (link.matches(".card-link")) {
+        var project = link.closest(".card--project").querySelector(".card-title");
+        posthog.capture("project_link_opened", {
+          project: project ? project.textContent.trim() : "unknown",
+        });
+      } else if (link.matches(".talks-row[href^='/articles/']")) {
+        posthog.capture("article_opened", {
+          article_slug: link.pathname.split("/").filter(Boolean).pop(),
+        });
+      } else if (link.matches(".talks-row[href]")) {
+        posthog.capture("media_link_opened", {
+          media_type: "podcast",
+        });
+      } else if (link.matches(".contact-link")) {
+        posthog.capture("contact_link_opened", {
+          contact_channel: link.hostname === "www.linkedin.com" ? "linkedin" : "github",
+        });
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initClock();
     initYear();
     initScrollSpy();
     initDrag();
+    initAnalytics();
   });
 })();
