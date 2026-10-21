@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@posthog/rollup-plugin": "^1.6.0",
-    "vite": "^8.2.2"
+    "vite": "^8.2.4"
   },
   "dependencies": {
     "posthog-js": "^1.430.2"
