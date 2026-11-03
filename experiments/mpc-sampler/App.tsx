@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import * as DocumentPicker from 'expo-document-picker';
 import * as Haptics from 'expo-haptics';
 import { useKeepAwake } from 'expo-keep-awake';
 import {
@@ -21,7 +20,8 @@ import {
   trigger,
   unloadVoice,
 } from './src/engine';
-import { PAD_COUNT, deleteSample, importSample, loadPads, savePads } from './src/storage';
+import { LibraryItem, PAD_COUNT, addToLibrary, loadPads, savePads } from './src/storage';
+import { SampleBrowser } from './src/SampleBrowser';
 
 type Mode = 'PLAY' | 'REC' | 'LOAD' | 'ERASE';
 const MODES: Mode[] = ['PLAY', 'REC', 'LOAD', 'ERASE'];
@@ -52,6 +52,7 @@ export default function App() {
   const [lit, setLit] = useState<Set<number>>(new Set());
   const [recordingPad, setRecordingPad] = useState<number | null>(null);
   const [message, setMessage] = useState('READY');
+  const [browserPad, setBrowserPad] = useState<number | null>(null);
   const padsRef = useRef(pads);
   padsRef.current = pads;
   const ready = useRef(false);
@@ -90,13 +91,15 @@ export default function App() {
     pads.forEach((p, i) => applyParams(i, p));
   }, [pads]);
 
-  const assign = async (id: number, sourceUri: string, name: string) => {
-    deleteSample(padsRef.current[id].uri);
-    const uri = importSample(sourceUri, id);
-    const pad = { ...padsRef.current[id], uri, name };
-    updatePad(id, { uri, name });
-    await loadVoice(id, pad, () => setLight(id, false));
-    setMessage(`PAD ${id + 1} ← ${name}`);
+  const assign = async (id: number, item: LibraryItem) => {
+    const pad = { ...padsRef.current[id], uri: item.uri, name: item.name };
+    updatePad(id, { uri: item.uri, name: item.name });
+    setMessage(`PAD ${id + 1} ← ${item.name}`);
+    try {
+      await loadVoice(id, pad, () => setLight(id, false));
+    } catch {
+      setMessage(`CAN'T DECODE ${item.name}`);
+    }
   };
 
   const startRecording = async (id: number) => {
@@ -119,21 +122,13 @@ export default function App() {
     await recorder.stop();
     setRecordingPad(null);
     await setRecordingMode(false);
-    if (recorder.uri) await assign(id, recorder.uri, `REC ${new Date().toLocaleTimeString()}`);
-  };
-
-  const pickFile = async (id: number) => {
-    const res = await DocumentPicker.getDocumentAsync({
-      type: 'audio/*',
-      copyToCacheDirectory: true,
-    });
-    if (res.canceled) return;
-    const asset = res.assets[0];
-    await assign(id, asset.uri, asset.name.replace(/\.[^.]+$/, '').toUpperCase());
+    if (recorder.uri) {
+      const stamp = new Date().toLocaleTimeString().replace(/:/g, '.');
+      await assign(id, addToLibrary(recorder.uri, `REC ${stamp}`));
+    }
   };
 
   const erase = (id: number) => {
-    deleteSample(padsRef.current[id].uri);
     unloadVoice(id);
     updatePad(id, emptyPad());
     setMessage(`PAD ${id + 1} ERASED`);
@@ -144,8 +139,8 @@ export default function App() {
   const recordingRef = useRef(recordingPad);
   recordingRef.current = recordingPad;
 
-  const handlers = useRef({ startRecording, stopRecording, pickFile, erase });
-  handlers.current = { startRecording, stopRecording, pickFile, erase };
+  const handlers = useRef({ startRecording, stopRecording, erase });
+  handlers.current = { startRecording, stopRecording, erase };
 
   // Stable identity so memoised pads don't re-render on every tap.
   const onPadIn = useCallback((id: number) => {
@@ -170,7 +165,7 @@ export default function App() {
         void handlers.current.startRecording(id);
         break;
       case 'LOAD':
-        void handlers.current.pickFile(id);
+        setBrowserPad(id);
         break;
       case 'ERASE':
         handlers.current.erase(id);
@@ -274,10 +269,28 @@ export default function App() {
           <Btn label="STOP ALL" onPress={() => { stopAll(); setLit(new Set()); }} />
         </View>
       </View>
+      <SampleBrowser
+        visible={browserPad !== null}
+        padLabel={browserPad === null ? '' : `PAD ${browserPad + 1}`}
+        currentUri={browserPad === null ? null : pads[browserPad].uri}
+        onClose={() => setBrowserPad(null)}
+        onAssign={(item) => {
+          const id = browserPad;
+          setBrowserPad(null);
+          if (id !== null) void assign(id, item);
+        }}
+        onDeleted={(uri) =>
+          padsRef.current.forEach((p, i) => {
+            if (p.uri === uri) erase(i);
+          })
+        }
+      />
     </SafeAreaView>
   );
 }
 
+// Raw touch events (not Pressable) so every finger is tracked independently:
+// each pad gets its own touch start/end, which is what makes multi-touch work.
 const PadButton = memo(function PadButton({
   id, local, loaded, name, lit, rec, selected, onIn, onOut,
 }: {
@@ -292,10 +305,10 @@ const PadButton = memo(function PadButton({
   onOut: (id: number) => void;
 }) {
   return (
-    <Pressable
-      onPressIn={() => onIn(id)}
-      onPressOut={() => onOut(id)}
-      unstable_pressDelay={0}
+    <View
+      onTouchStart={() => onIn(id)}
+      onTouchEnd={() => onOut(id)}
+      onTouchCancel={() => onOut(id)}
       style={[
         styles.pad,
         loaded && styles.padLoaded,
@@ -304,13 +317,15 @@ const PadButton = memo(function PadButton({
         selected && styles.padSelected,
       ]}
     >
-      <Text style={[styles.padNum, loaded && styles.padNumLoaded]}>{local + 1}</Text>
+      <Text pointerEvents="none" style={[styles.padNum, loaded && styles.padNumLoaded]}>
+        {local + 1}
+      </Text>
       {loaded && (
-        <Text style={styles.padName} numberOfLines={1}>
+        <Text pointerEvents="none" style={styles.padName} numberOfLines={1}>
           {name}
         </Text>
       )}
-    </Pressable>
+    </View>
   );
 });
 

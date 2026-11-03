@@ -31,8 +31,16 @@ Pad 1 is bottom-left, as on an MPC. Bottom buttons pick what tapping a pad does:
 |-------|------------------------------------------------------------|
 | PLAY  | trigger its sample (retriggers from the top)               |
 | REC   | start recording from the mic; tap the pad again to stop    |
-| LOAD  | pick an audio file from the phone onto the pad             |
+| LOAD  | open the sample browser for that pad                       |
 | ERASE | clear the pad                                              |
+
+Pads are multi-touch: hold as many fingers down as you like.
+
+**Sample browser:** tap a row to audition it, then ASSIGN to load it onto the
+pad. It lists a built-in drum kit (generated on first launch) plus your own
+samples. ADD FILES imports audio from the phone, and anything you record is added
+to the library automatically. DELETE removes a user sample (and clears any pads
+using it).
 
 The last pad you touched is *selected*. The LCD shows its name, and the buttons
 below adjust its volume, pitch (±12 semitones, tape-style so speed changes too)

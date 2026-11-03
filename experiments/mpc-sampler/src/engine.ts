@@ -125,3 +125,50 @@ export async function setRecordingMode(recording: boolean) {
     playsInSilentMode: true,
   });
 }
+
+// ---- Sample browser preview -------------------------------------------------
+
+const previewBuffers = new Map<string, AudioBuffer>();
+let previewSource: AudioBufferSourceNode | null = null;
+let previewGain: GainNode | null = null;
+
+export async function preview(uri: string, onEnd: () => void) {
+  stopPreview();
+  const c = getCtx();
+  let buffer = previewBuffers.get(uri);
+  if (!buffer) {
+    buffer = await c.decodeAudioData(uri);
+    previewBuffers.set(uri, buffer);
+  }
+  if (!previewGain) {
+    previewGain = c.createGain();
+    previewGain.connect(c.destination);
+  }
+  const src = c.createBufferSource();
+  src.buffer = buffer;
+  src.connect(previewGain);
+  src.onEnded = () => {
+    if (previewSource === src) {
+      previewSource = null;
+      onEnd();
+    }
+  };
+  previewSource = src;
+  src.start();
+}
+
+export function stopPreview() {
+  const src = previewSource;
+  if (!src) return;
+  previewSource = null;
+  src.onEnded = null;
+  try {
+    src.stop();
+  } catch {
+    // already ended
+  }
+}
+
+export function forgetPreview(uri: string) {
+  previewBuffers.delete(uri);
+}
