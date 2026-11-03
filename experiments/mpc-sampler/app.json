@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "MPC Sampler",
+    "slug": "mpc-sampler",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#15161a",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "uk.co.joewebber.mpcsampler"
+    },
+    "android": {
+      "package": "uk.co.joewebber.mpcsampler",
+      "adaptiveIcon": {
+        "backgroundColor": "#15161a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "plugins": [
+      [
+        "expo-audio",
+        { "microphonePermission": "MPC Sampler records audio from the microphone so you can sample it onto a pad." }
+      ]
+    ]
+  }
+}
