@@ -4,25 +4,24 @@ An Akai MPC-style sampler for your phone. Expo / React Native, 16 pads × 4 bank
 
 ## Run it on your phone
 
-Easiest route is **Expo Go** (no build needed; everything used here works in it):
+Playback uses `react-native-audio-api` (decoded buffers on a native audio graph)
+for low-latency pads. That's a native module, so **Expo Go can't run it**. Use an
+APK or a dev build.
+
+**APK via GitHub Actions (no computer needed):** every push under
+`experiments/mpc-sampler` on the working branch runs
+`.github/workflows/mpc-sampler-apk.yml`, which attaches `mpc-sampler.apk` to a
+GitHub Release. Download and install it on the phone.
+
+**Locally:**
 
 ```bash
 cd experiments/mpc-sampler
 npm install
-npx expo start
+npx expo run:android          # builds and installs on a connected phone
 ```
 
-Install **Expo Go** from the App Store / Play Store and scan the QR code
-(Camera app on iOS, Expo Go's scanner on Android). Phone and computer must be on
-the same network; add `--tunnel` if they aren't.
-
-### Installing a real build instead
-
-```bash
-npm i -g eas-cli && eas login
-eas build -p android --profile preview   # installable .apk
-eas build -p ios --profile preview       # needs an Apple developer account
-```
+Or `eas build -p android --profile preview` (iOS needs an Apple developer account).
 
 ## How it works
 
@@ -44,5 +43,5 @@ Samples and pad settings are saved on the device and restored on launch.
 ## Not built yet
 
 Sequencer / step recording, sample trimming, chop, choke groups, velocity
-(touch pressure), master effects, project export. Audio latency is whatever
-`expo-audio` gives; if it matters, the next step is a native audio module.
+(touch pressure), master effects, project export. Recording still uses `expo-audio`; playback is
+`react-native-audio-api`. iOS audio-session handling between the two is untested.

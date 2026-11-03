@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import * as Haptics from 'expo-haptics';
@@ -76,7 +76,9 @@ export default function App() {
     const saved = loadPads();
     if (saved && saved.length === PAD_COUNT) {
       setPads(saved);
-      saved.forEach((p, i) => loadVoice(i, p, () => setLight(i, false)));
+      saved.forEach((p, i) => {
+        if (p.uri) void loadVoice(i, p, () => setLight(i, false));
+      });
     }
     ready.current = true;
   }, [setLight]);
@@ -88,12 +90,12 @@ export default function App() {
     pads.forEach((p, i) => applyParams(i, p));
   }, [pads]);
 
-  const assign = (id: number, sourceUri: string, name: string) => {
+  const assign = async (id: number, sourceUri: string, name: string) => {
     deleteSample(padsRef.current[id].uri);
     const uri = importSample(sourceUri, id);
     const pad = { ...padsRef.current[id], uri, name };
-    loadVoice(id, pad, () => setLight(id, false));
     updatePad(id, { uri, name });
+    await loadVoice(id, pad, () => setLight(id, false));
     setMessage(`PAD ${id + 1} ← ${name}`);
   };
 
@@ -112,12 +114,12 @@ export default function App() {
   };
 
   const stopRecording = async () => {
-    const id = recordingPad;
+    const id = recordingRef.current;
     if (id === null) return;
     await recorder.stop();
     setRecordingPad(null);
     await setRecordingMode(false);
-    if (recorder.uri) assign(id, recorder.uri, `REC ${new Date().toLocaleTimeString()}`);
+    if (recorder.uri) await assign(id, recorder.uri, `REC ${new Date().toLocaleTimeString()}`);
   };
 
   const pickFile = async (id: number) => {
@@ -127,7 +129,7 @@ export default function App() {
     });
     if (res.canceled) return;
     const asset = res.assets[0];
-    assign(id, asset.uri, asset.name.replace(/\.[^.]+$/, '').toUpperCase());
+    await assign(id, asset.uri, asset.name.replace(/\.[^.]+$/, '').toUpperCase());
   };
 
   const erase = (id: number) => {
@@ -137,40 +139,55 @@ export default function App() {
     setMessage(`PAD ${id + 1} ERASED`);
   };
 
-  const onPadIn = async (id: number) => {
-    setSelected(id);
-    if (recordingPad !== null) {
-      if (recordingPad === id) await stopRecording();
+  const modeRef = useRef(mode);
+  modeRef.current = mode;
+  const recordingRef = useRef(recordingPad);
+  recordingRef.current = recordingPad;
+
+  const handlers = useRef({ startRecording, stopRecording, pickFile, erase });
+  handlers.current = { startRecording, stopRecording, pickFile, erase };
+
+  // Stable identity so memoised pads don't re-render on every tap.
+  const onPadIn = useCallback((id: number) => {
+    const pad = padsRef.current[id];
+    // Sound first, UI second.
+    if (recordingRef.current === null && modeRef.current === 'PLAY') {
+      if (pad.uri) {
+        trigger(id, pad, () => setLight(id, false));
+        setLight(id, true);
+        void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      }
+      setSelected(id);
       return;
     }
-    const pad = padsRef.current[id];
-    switch (mode) {
-      case 'PLAY':
-        if (!pad.uri) return;
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        setLight(id, true);
-        await trigger(id);
-        break;
+    setSelected(id);
+    if (recordingRef.current !== null) {
+      if (recordingRef.current === id) void handlers.current.stopRecording();
+      return;
+    }
+    switch (modeRef.current) {
       case 'REC':
-        await startRecording(id);
+        void handlers.current.startRecording(id);
         break;
       case 'LOAD':
-        await pickFile(id);
+        void handlers.current.pickFile(id);
         break;
       case 'ERASE':
-        erase(id);
+        handlers.current.erase(id);
         break;
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const onPadOut = (id: number) => {
+  const onPadOut = useCallback((id: number) => {
     const pad = padsRef.current[id];
-    if (mode === 'PLAY' && pad.mode === 'GATE') {
+    if (modeRef.current === 'PLAY' && pad.mode === 'GATE') {
       release(id, pad);
       setLight(id, false);
     }
-    // One-shots go dark via the player's didJustFinish; loops stay lit until stopped.
-  };
+    // One-shots go dark via onEnded; loops stay lit until stopped.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sel = pads[selected];
   const stepVol = (d: number) =>
@@ -222,25 +239,18 @@ export default function App() {
                 const isRec = recordingPad === id;
                 const isLit = lit.has(id);
                 return (
-                  <Pressable
+                  <PadButton
                     key={id}
-                    onPressIn={() => onPadIn(id)}
-                    onPressOut={() => onPadOut(id)}
-                    style={[
-                      styles.pad,
-                      p.uri && styles.padLoaded,
-                      isLit && styles.padLit,
-                      isRec && styles.padRec,
-                      selected === id && styles.padSelected,
-                    ]}
-                  >
-                    <Text style={[styles.padNum, p.uri && styles.padNumLoaded]}>{local + 1}</Text>
-                    {!!p.uri && (
-                      <Text style={styles.padName} numberOfLines={1}>
-                        {p.name}
-                      </Text>
-                    )}
-                  </Pressable>
+                    id={id}
+                    local={local}
+                    loaded={!!p.uri}
+                    name={p.name}
+                    lit={isLit}
+                    rec={isRec}
+                    selected={selected === id}
+                    onIn={onPadIn}
+                    onOut={onPadOut}
+                  />
                 );
               })}
             </View>
@@ -267,6 +277,42 @@ export default function App() {
     </SafeAreaView>
   );
 }
+
+const PadButton = memo(function PadButton({
+  id, local, loaded, name, lit, rec, selected, onIn, onOut,
+}: {
+  id: number;
+  local: number;
+  loaded: boolean;
+  name: string;
+  lit: boolean;
+  rec: boolean;
+  selected: boolean;
+  onIn: (id: number) => void;
+  onOut: (id: number) => void;
+}) {
+  return (
+    <Pressable
+      onPressIn={() => onIn(id)}
+      onPressOut={() => onOut(id)}
+      unstable_pressDelay={0}
+      style={[
+        styles.pad,
+        loaded && styles.padLoaded,
+        lit && styles.padLit,
+        rec && styles.padRec,
+        selected && styles.padSelected,
+      ]}
+    >
+      <Text style={[styles.padNum, loaded && styles.padNumLoaded]}>{local + 1}</Text>
+      {loaded && (
+        <Text style={styles.padName} numberOfLines={1}>
+          {name}
+        </Text>
+      )}
+    </Pressable>
+  );
+});
 
 function Btn({
   label,

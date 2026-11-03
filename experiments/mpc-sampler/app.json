@@ -23,7 +23,20 @@
     "plugins": [
       [
         "expo-audio",
-        { "microphonePermission": "MPC Sampler records audio from the microphone so you can sample it onto a pad." }
+        {
+          "microphonePermission": "MPC Sampler records audio from the microphone so you can sample it onto a pad."
+        }
+      ],
+      [
+        "react-native-audio-api",
+        {
+          "iosBackgroundMode": false,
+          "androidForegroundService": false,
+          "androidPermissions": [
+            "android.permission.RECORD_AUDIO"
+          ],
+          "disableFFmpeg": false
+        }
       ]
     ]
   }

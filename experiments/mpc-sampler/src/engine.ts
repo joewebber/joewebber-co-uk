@@ -1,8 +1,10 @@
+import { setAudioModeAsync } from 'expo-audio';
 import {
-  AudioPlayer,
-  createAudioPlayer,
-  setAudioModeAsync,
-} from 'expo-audio';
+  AudioBuffer,
+  AudioBufferSourceNode,
+  AudioContext,
+  GainNode,
+} from 'react-native-audio-api';
 
 export type PlayMode = 'ONE-SHOT' | 'LOOP' | 'GATE';
 
@@ -22,46 +24,78 @@ export const emptyPad = (): Pad => ({
   mode: 'ONE-SHOT',
 });
 
-type Voice = { player: AudioPlayer; sub: { remove(): void }; uri: string };
+/**
+ * Samples are decoded to PCM once, up front, and held in memory. Triggering a
+ * pad is then just "start a new buffer source" on a native audio graph, which
+ * is how hardware samplers behave and is far lower latency than a media player.
+ */
+type Voice = {
+  buffer: AudioBuffer;
+  gain: GainNode;
+  source: AudioBufferSourceNode | null;
+};
+
+let ctx: AudioContext | null = null;
 const voices = new Map<number, Voice>();
 
+const getCtx = () => (ctx ??= new AudioContext());
 const semitoneRate = (st: number) => Math.pow(2, st / 12);
 
-/** (Re)build the player for a pad. Call whenever its sample changes. */
-export function loadVoice(id: number, pad: Pad, onFinish: () => void) {
+export async function loadVoice(id: number, pad: Pad, onFinish: () => void) {
   unloadVoice(id);
   if (!pad.uri) return;
-  const player = createAudioPlayer(pad.uri, { keepAudioSessionActive: true });
-  player.shouldCorrectPitch = false; // tape-style pitch, like a hardware sampler
-  const sub = player.addListener('playbackStatusUpdate', (s) => {
-    if (s.didJustFinish) onFinish();
-  });
-  voices.set(id, { player, sub, uri: pad.uri });
+  const c = getCtx();
+  const buffer = await c.decodeAudioData(pad.uri);
+  const gain = c.createGain();
+  gain.connect(c.destination);
+  voices.set(id, { buffer, gain, source: null });
   applyParams(id, pad);
+  void onFinish;
 }
 
 export function unloadVoice(id: number) {
   const v = voices.get(id);
   if (!v) return;
-  v.sub.remove();
-  v.player.remove();
+  stop(id);
+  v.gain.disconnect();
   voices.delete(id);
 }
 
 export function applyParams(id: number, pad: Pad) {
   const v = voices.get(id);
   if (!v) return;
-  v.player.volume = pad.volume;
-  v.player.loop = pad.mode === 'LOOP';
-  v.player.setPlaybackRate(semitoneRate(pad.pitch));
+  v.gain.gain.value = pad.volume;
+  if (v.source) {
+    v.source.loop = pad.mode === 'LOOP';
+    v.source.playbackRate.value = semitoneRate(pad.pitch);
+  }
 }
 
-export async function trigger(id: number) {
+/** Fire the pad immediately. Synchronous: no awaits between tap and sound. */
+export function trigger(id: number, pad: Pad, onFinish: () => void) {
   const v = voices.get(id);
   if (!v) return;
-  // Retrigger from the top, like a hardware pad.
-  if (v.player.playing || v.player.currentTime > 0) await v.player.seekTo(0);
-  v.player.play();
+  if (v.source) {
+    v.source.onEnded = null;
+    try {
+      v.source.stop();
+    } catch {
+      // already ended
+    }
+  }
+  const src = getCtx().createBufferSource();
+  src.buffer = v.buffer;
+  src.loop = pad.mode === 'LOOP';
+  src.playbackRate.value = semitoneRate(pad.pitch);
+  src.connect(v.gain);
+  src.onEnded = () => {
+    if (v.source === src) {
+      v.source = null;
+      onFinish();
+    }
+  };
+  v.source = src;
+  src.start();
 }
 
 export function release(id: number, pad: Pad) {
@@ -70,9 +104,15 @@ export function release(id: number, pad: Pad) {
 
 export function stop(id: number) {
   const v = voices.get(id);
-  if (!v) return;
-  v.player.pause();
-  void v.player.seekTo(0);
+  if (!v?.source) return;
+  const src = v.source;
+  v.source = null;
+  src.onEnded = null;
+  try {
+    src.stop();
+  } catch {
+    // already ended
+  }
 }
 
 export function stopAll() {
